@@ -12,3 +12,7 @@
 
 # Please, add your custom content below!
 .DS_Store
+.env
+.venv/
+__pycache__/
+.ruff_cache/

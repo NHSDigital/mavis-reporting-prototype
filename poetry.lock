@@ -166,6 +166,21 @@ files = [
 ]
 
 [[package]]
+name = "nhsuk-frontend-jinja"
+version = "0.3.1"
+description = "A port of NHS.UK frontend templates for the Jinja templating engine."
+optional = false
+python-versions = ">=3.11"
+groups = ["main"]
+files = [
+    {file = "nhsuk_frontend_jinja-0.3.1-py3-none-any.whl", hash = "sha256:34834315fa8ec833845780f6ccf1537cfcf17200967ad64bdb629c36b115fdfb"},
+    {file = "nhsuk_frontend_jinja-0.3.1.tar.gz", hash = "sha256:dd5609f1edacfc92d072a1716559d1635f8c254f1c258f38ee92243346475e7e"},
+]
+
+[package.dependencies]
+jinja2 = ">=3.1.6,<4.0.0"
+
+[[package]]
 name = "python-dotenv"
 version = "1.1.0"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -229,4 +244,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "d19782c13119c5f8f6fe4fc98275c1126f9577d212bfa29bf0ac7537005ee0d3"
+content-hash = "5f737495da88af703a3aaf7d90e01bd6b8f506dcaf65a20bcb3119c2851d7a99"

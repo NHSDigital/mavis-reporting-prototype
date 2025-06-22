@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "name": "mavis-reporting-prototype",
+  "scripts": {
+    "build:scss": "sass mavis_reporting/assets/scss/app.scss:mavis_reporting/static/css/app.css --style=compressed --no-source-map",
+    "build:scss:dev": "sass --load-path=node_modules --watch mavis_reporting/assets/scss:mavis_reporting/static/css --style=expanded --source-map"
+  },
+  "dependencies": {
+    "nhsuk-frontend": "^9.3.0"
+  },
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}

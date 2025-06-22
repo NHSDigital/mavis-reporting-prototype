@@ -1,0 +1,28 @@
+{% from 'header/macro.jinja' import header %}
+{% extends 'template.jinja' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ static('css/app.css') }}">
+{% endblock %}
+
+{% block header %}
+{{ header({
+  "service": {
+    "name": "Manage vaccinations in schools"
+  },
+  "showNav": "true",
+  "primaryLinks": [
+      {
+        "url": "/",
+        "label": "Reporting",
+      }
+    ]
+}) }}
+{% endblock %}
+
+{% block content %}
+
+{% block page_content %}
+{% endblock %}
+
+{% endblock %}

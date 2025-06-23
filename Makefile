@@ -4,6 +4,7 @@ include scripts/init.mk
 
 .PHONY: install
 install:
+	npm install
 	poetry config virtualenvs.in-project true
 	poetry install
 
@@ -13,10 +14,8 @@ lint:
 
 .PHONY: dev
 dev:
-	@echo "Starting Sass watcher, JavaScript bundler and Flask development server..."
+	@npm install
+	@poetry install
+	@echo "Starting development servers ..."
 	@echo "Press Ctrl+C to stop all processes"
-	@trap 'jobs -p | xargs kill 2>/dev/null; exit' INT TERM; \
-	npm run build:scss:dev & \
-	npm run build:js:dev & \
-	poetry run flask run --debug & \
-	wait
+	@poetry run honcho start -f Procfile.dev

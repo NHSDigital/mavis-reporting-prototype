@@ -21,7 +21,7 @@ A Flask-based web application prototype for the commissioner reporting component
 
 2. **Install project dependencies**:
 
-  This will install the project dependencies using poetry.
+  This will install the project dependencies using Poetry and NPM.
 
   Note that the Poetry virtual environment will be created in the `.venv` directory to allow IDEs to use the correct Python interpreter.
 
@@ -33,10 +33,10 @@ A Flask-based web application prototype for the commissioner reporting component
 
    Create a `.env` file in the root of the project following the example provided in `.env.example`.
 
-4. **Run the application**:
+4. **Run the application in development mode**:
 
    ```bash
-   make run
+   make dev
    ```
 
 The application will be available at `http://localhost:5000`.

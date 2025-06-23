@@ -11,7 +11,7 @@ A Flask-based web application prototype for the commissioner reporting component
 
 1. **Install Mise**:
 
-   Please see the main Mavis repository for how to install mise.
+   Please see the main Mavis repository for [how to install mise](https://github.com/nhsuk/manage-vaccinations-in-schools?tab=readme-ov-file#mise).
 
    Once mise is installed, run the following command to install the project dependencies:
 

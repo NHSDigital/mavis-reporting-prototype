@@ -20,3 +20,6 @@ node_modules/
 
 mavis_reporting/static/css/*
 !mavis_reporting/static/css/.keep
+
+mavis_reporting/static/js/*
+!mavis_reporting/static/js/.keep

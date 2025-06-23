@@ -1,14 +1,18 @@
 {
-  "type": "module",
   "name": "mavis-reporting-prototype",
+  "type": "module",
+  "private": true,
   "scripts": {
     "build:scss": "sass mavis_reporting/assets/scss/app.scss:mavis_reporting/static/css/app.css --style=compressed --no-source-map",
-    "build:scss:dev": "sass --load-path=node_modules --watch mavis_reporting/assets/scss:mavis_reporting/static/css --style=expanded --source-map"
+    "build:scss:dev": "sass --load-path=node_modules --watch mavis_reporting/assets/scss:mavis_reporting/static/css --style=expanded --source-map",
+    "build:js": "esbuild mavis_reporting/javascript/app.js --bundle --outfile=mavis_reporting/static/js/app.js --minify",
+    "build:js:dev": "esbuild mavis_reporting/javascript/app.js --bundle --outfile=mavis_reporting/static/js/app.js --sourcemap --minify --watch"
   },
   "dependencies": {
     "nhsuk-frontend": "^9.3.0"
   },
   "devDependencies": {
+    "esbuild": "^0.25.5",
     "sass": "^1.89.2"
   }
 }

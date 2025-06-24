@@ -1,0 +1,23 @@
+[project]
+name = "mavis-reporting-prototype"
+version = "0.1.0"
+description = "Prototype code for the commissioner reporting component of Mavis"
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.13"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+flask = "==3.1.1"
+python-dotenv = "==1.1.0"
+nhsuk-frontend-jinja = "==0.3.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "==0.12.0"
+honcho = "^2.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

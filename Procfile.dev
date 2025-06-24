@@ -1,0 +1,3 @@
+scss: npm run build:scss:dev
+js: npm run build:js:dev
+flask: poetry run flask run --debug

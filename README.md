@@ -9,7 +9,7 @@ A Flask-based web application prototype for the commissioner reporting component
 
 ## Installation
 
-1. **Install Mise**:
+1. **Install Mise**
 
    Please see the main Mavis repository for [how to install mise](https://github.com/nhsuk/manage-vaccinations-in-schools?tab=readme-ov-file#mise).
 
@@ -19,24 +19,24 @@ A Flask-based web application prototype for the commissioner reporting component
    mise install
    ```
 
-2. **Install project dependencies**:
+2. **Install project dependencies**
 
-  This will install the project dependencies using Poetry and NPM.
+   This will install the project dependencies using Poetry and NPM.
 
-  Note that the Poetry virtual environment will be created in the `.venv` directory to allow IDEs to use the correct Python interpreter.
+   Note that the Poetry virtual environment will be created in the `.venv` directory to allow IDEs to use the correct Python interpreter.
 
    ```bash
    make install
    ```
 
-3. **Create environment file**:
+3. **Create an environment file**
 
    Create a `.env` file in the root of the project following the example provided in `.env.example`.
 
-4. **Run the application in development mode**:
+4. **Run the application in development mode**
 
    ```bash
    make dev
    ```
 
-The application will be available at `http://localhost:5000`.
+   The application will be available at `http://localhost:5000`.

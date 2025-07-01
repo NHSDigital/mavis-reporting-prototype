@@ -8,6 +8,9 @@ class Config:
     """Base configuration"""
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    # Used as the base for constructing URLs to
+    # exchange auth tokens, and request data
+    MAVIS_ROOT_URL = os.environ.get("MAVIS_ROOT_URL")
 
     # Flask config
     TEMPLATES_AUTO_RELOAD = True

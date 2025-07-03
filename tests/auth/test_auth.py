@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, timezone
-from flask import session
 import urllib.parse
 
 def it_redirects_to_mavis_start(response):

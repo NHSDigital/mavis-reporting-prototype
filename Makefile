@@ -26,9 +26,6 @@ dev: install
 	@poetry run honcho start -f Procfile.dev
 
 .PHONY: test
-test:
-	@true
-
-.PHONY: test-coverage
-test-coverage:
-	@true
+test: install
+	@echo "Running all tests .."
+	@poetry run pytest tests --verbose 

@@ -7,17 +7,21 @@ on:
   pull_request:
 
 jobs:
-  test-unit:
-    name: "Unit tests"
+  test:
+    name: "Run tests"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
-      - name: "Run unit test suite"
+      - name: "Install dependencies"
+        uses: jdx/mise-action@v2
+        with:
+          cache: true
+      - name: "Run test suite"
         run: |
           make test
-      - name: "Save the result of fast test suite"
+      - name: "Save the result of test suite"
         run: |
           echo "Nothing to save"
   test-lint:
@@ -36,7 +40,7 @@ jobs:
           make lint
   test-coverage:
     name: "Test coverage"
-    needs: [test-unit]
+    needs: [test]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

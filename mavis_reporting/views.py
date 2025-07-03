@@ -20,8 +20,8 @@ def login_required(f):
         if not auth_helper.is_logged_in(session, current_app):
             token = request.args.get('token')
             if token:
-                user_data = auth_helper.verify_token(token)
-                auth_helper.log_user_in(user_data)
+                user_data = mavis_helper.verify_token(token, current_app)
+                auth_helper.log_user_in(user_data, session)
             else:
                 target_url = mavis_helper.mavis_url(current_app, '/start?redirect_after_login=' + urllib.parse.quote(request.url))
                 return redirect(target_url)

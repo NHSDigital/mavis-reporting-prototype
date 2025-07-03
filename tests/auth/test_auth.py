@@ -1,4 +1,5 @@
 from flask import session
+import urllib.parse
 
 def test_when_user_id_in_session_it_does_not_redirect(client):
     with client.session_transaction() as session:
@@ -23,6 +24,8 @@ def test_when_user_id_not_in_session_it_redirects_to_mavis_sign_in(client):
     assert redirect_to.startswith( 'http://mavis-root.localhost/' )
     assert "/users/sign-in" in redirect_to;
 
-    # TODO: Check that the return_url param on the redirect
+    # Check that the return_url param on the redirect
+    parsed_url = urllib.parse.urlparse(redirect_to)
+    assert 'redirect_after_login=' in parsed_url.query
 
  

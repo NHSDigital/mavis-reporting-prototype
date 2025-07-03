@@ -14,6 +14,7 @@ class Config:
 
     # Flask config
     TEMPLATES_AUTO_RELOAD = True
+    SESSION_TTL_SECONDS = int(os.environ.get("SESSION_TTL_SECONDS") or "600")
 
 
 class DevelopmentConfig(Config):

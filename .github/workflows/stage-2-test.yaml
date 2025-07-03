@@ -19,6 +19,8 @@ jobs:
         with:
           cache: true
       - name: "Run test suite"
+        env:
+          SECRET_KEY: "${{ secrets.SECRET_KEY_FOR_TESTS }}"
         run: |
           make test
       - name: "Save the result of test suite"

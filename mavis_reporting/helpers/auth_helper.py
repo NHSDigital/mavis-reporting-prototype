@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 
+import sys
 from mavis_reporting.helpers import mavis_helper
 
 
@@ -18,6 +19,7 @@ def is_logged_in(session, current_app):
             session.clear()
             return False
         else:
+            session["last_visit"] = datetime.now().astimezone(timezone.utc)
             return True
 
     else:
@@ -27,7 +29,7 @@ def is_logged_in(session, current_app):
 def log_user_in(data, session):
     session["user_id"] = data["user_id"]
     session["created_at"] = data["created_at"]
-    session["last_visit"] = datetime.now()
+    session["last_visit"] = datetime.now().astimezone(timezone.utc)
     session["cis2_info"] = data["cis2_info"]
     session["user"] = data["user"]
 

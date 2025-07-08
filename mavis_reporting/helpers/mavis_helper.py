@@ -1,3 +1,4 @@
+import jwt
 import requests
 import urllib.parse
 
@@ -9,10 +10,12 @@ def mavis_url(current_app, path):
 def verify_token(token, current_app):
     url = mavis_url(current_app, "/tokens/" + token)
     user_data = None
+    secret = current_app.config["SECRET_KEY"]
 
-    headers = {"Authorization": current_app.config["SECRET_KEY"]}
+    headers = {"Authorization": secret}
     r = requests.get(url, headers=headers)
 
-    user_data = r.json()
+    token_data = r.json()
+    jwt_data = jwt.decode(token_data["jwt"], secret, algorithms="HS512")
 
-    return user_data
+    return jwt_data["data"]

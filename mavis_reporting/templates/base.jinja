@@ -1,3 +1,4 @@
+
 {% from 'header/macro.jinja' import header %}
 {% extends 'template.jinja' %}
 
@@ -13,6 +14,14 @@
   },
   "showNav": "true",
   "primaryLinks": [
+      {
+        "url": config["MAVIS_ROOT_URL"],
+        "label": "Home",
+      },
+      {
+        "url": config["MAVIS_ROOT_URL"] + 'dashboard',
+        "label": "Dashboard",
+      },
       {
         "url": "/",
         "label": "Reporting",

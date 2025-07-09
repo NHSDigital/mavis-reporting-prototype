@@ -30,7 +30,7 @@ test:
 test-coverage:
 	@poetry install
 	@echo "Checking coverage on all tests .."
-	@poetry run pytest tests --cov --cov-report json
+	@poetry run coverage run -m  pytest tests 
 	@poetry run coverage report --fail-under=${FAIL_IF_UNDER}
 	@poetry run coverage html
 	@poetry run coverage-badge -o coverage.svg

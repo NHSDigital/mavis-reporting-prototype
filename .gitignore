@@ -20,3 +20,5 @@ mavis_reporting/static/js/*
 !mavis_reporting/static/js/.keep
 
 .coverage
+htmlcov
+coverage.svg

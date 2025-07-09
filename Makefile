@@ -19,3 +19,9 @@ dev:
 	@echo "Starting development servers ..."
 	@echo "Press Ctrl+C to stop all processes"
 	@poetry run honcho start -f Procfile.dev
+
+.PHONY: test
+test:
+	@poetry install
+	@echo "Running all tests .."
+	@poetry run pytest tests --verbose 

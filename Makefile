@@ -25,3 +25,12 @@ test:
 	@poetry install
 	@echo "Running all tests .."
 	@poetry run pytest tests --verbose 
+
+.PHONY: test-coverage
+test-coverage:
+	@poetry install
+	@echo "Checking coverage on all tests .."
+	@poetry run coverage run -m pytest tests 
+	@poetry run coverage report
+	@poetry run coverage html
+	

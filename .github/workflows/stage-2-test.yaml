@@ -77,5 +77,9 @@ jobs:
         run: |
           make test-coverage
       - name: "Save the coverage check result"
-        run: |
-          echo "Nothing to save"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-html
+          path: htmlcov
+          retention-days: 10

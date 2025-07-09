@@ -8,14 +8,14 @@
 #   - secret scanning, which we expect to be a pre-commit hook
 #   - code review, which is outside the scope of automated testing for the moment
 
-test-unit: # Run your unit tests from scripts/test/unit @Testing
-	make _test name="unit"
+# test-unit: # Run your unit tests from scripts/test/unit @Testing
+# 	make _test name="unit"
 
 test-lint: # Lint your code from scripts/test/lint @Testing
 	make _test name="lint"
 
-test-coverage: # Evaluate code coverage from scripts/test/coverage @Testing
-	make _test name="coverage"
+# test-coverage: # Evaluate code coverage from scripts/test/coverage @Testing
+# 	make _test name="coverage"
 
 test-accessibility: # Run your accessibility tests from scripts/test/accessibility @Testing
 	make _test name="accessibility"

@@ -20,3 +20,7 @@ mavis_reporting/static/js/*
 !mavis_reporting/static/js/.keep
 
 sentinel
+
+.coverage
+htmlcov
+coverage.svg

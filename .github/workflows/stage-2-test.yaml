@@ -45,12 +45,38 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
+    outputs:
+      badge_url: ${{ steps.upload-coverage-badge-artifact-step.outputs.artifact-url }}
+      html_report_url: ${{ steps.upload-html-report-artifact-step.outputs.artifact-url }}
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
+      - name: "Install dependencies"
+        uses: jdx/mise-action@v2
+        with:
+          cache: true
       - name: "Run test coverage check"
+        env:
+            SECRET_KEY: "${{ secrets.SECRET_KEY_FOR_TESTS }}"
+            FAIL_IF_UNDER: 80
         run: |
           make test-coverage
       - name: "Save the coverage check result"
-        run: |
-          echo "Nothing to save"
+        uses: actions/upload-artifact@v4
+        id: upload-html-report-artifact-step
+        if: always()
+        with:
+          name: coverage-html
+          path: htmlcov
+          retention-days: 10
+          compression-level: 0
+      - name: "Save the coverage check badge"
+        uses: actions/upload-artifact@v4
+        id: upload-coverage-badge-artifact-step
+        if: always()
+        with:
+          name: coverage-badge
+          path: coverage.svg
+          retention-days: 10
+          compression-level: 0

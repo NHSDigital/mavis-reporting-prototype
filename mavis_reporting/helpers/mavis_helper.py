@@ -1,8 +1,11 @@
 import jwt
 import requests
 import urllib.parse
+import werkzeug
 
 from flask import abort, redirect, request
+
+from werkzeug.exceptions import Unauthorized
 
 
 def mavis_url(current_app, path, params={}):
@@ -36,8 +39,9 @@ def api_call(current_app, session, request, path, params={}):
         "Content-type": "application/json; charset=utf-8",
     }
     response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-        login_and_return_after(current_app, url)
+    if response.status_code == 401 or response.status_code == 403:
+        session.clear()
+        raise (werkzeug.exceptions.Unauthorized)
 
     return response
 

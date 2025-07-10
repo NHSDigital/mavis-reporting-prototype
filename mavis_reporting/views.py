@@ -9,6 +9,8 @@ from flask import (
     current_app,
 )
 
+from werkzeug.exceptions import HTTPException, NotFound, Unauthorized
+
 import json
 import logging
 import urllib.parse, urllib.request
@@ -31,6 +33,13 @@ def index():
 @main.route("/api-call")
 @auth_helper.login_required
 def api_call():
-    response = mavis_helper.api_call(current_app, session, "/reporting/totals")
+    response = None
+    try:
+        response = mavis_helper.api_call(
+            current_app, session, request, "/reporting/totals"
+        )
+    except Unauthorized as e:
+        return mavis_helper.login_and_return_after(current_app, request.url)
+
     data = response.json()
     return render_template("api_call.jinja", response=response, data=data)

@@ -104,18 +104,11 @@ jobs:
           path: coverage.svg
           retention-days: 10
       - name: Add comment to PR
-        uses: actions/github-script@v7
-        env:
-          PR_COMMENT_BODY: |
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
             ![Coverage](${{steps.upload-coverage-badge-artifact-step.outputs.artifact-url}})
             [Full report]](${{steps.upload-html-report-artifact-step.outputs.artifact-url}})
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              issue_number: context.issue.number,
-              repo: context.repo.repo,
-              body: process.env.PR_COMMENT_BODY
-            })
+
         

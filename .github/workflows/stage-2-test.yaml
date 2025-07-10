@@ -105,11 +105,3 @@ jobs:
           path: coverage.svg
           retention-days: 10
           compression-level: 0
-      - name: Display coverage
-        uses: ewjoachim/coverage-comment-action@v1
-        with:
-          GITHUB_TOKEN: ${{ github.token }}
-          MINIMUM_GREEN: 90
-          MINIMUM_ORANGE: 70
-          BADGE_ENABLED: "true"
-          COVERAGE_FILE: "coverage.xml"

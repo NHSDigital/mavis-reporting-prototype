@@ -33,5 +33,6 @@ test-coverage:
 	@poetry run coverage run -m  pytest tests 
 	@poetry run coverage report --fail-under=${FAIL_IF_UNDER}
 	@poetry run coverage html
+	@poetry run coverage xml coverage.xml
 	@poetry run coverage-badge -o coverage.svg
 	

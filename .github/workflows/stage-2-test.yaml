@@ -95,6 +95,7 @@ jobs:
           name: coverage-html
           path: htmlcov
           retention-days: 10
+          compression-level: 0
       - name: "Save the coverage check badge"
         uses: actions/upload-artifact@v4
         id: upload-coverage-badge-artifact-step
@@ -103,12 +104,9 @@ jobs:
           name: coverage-badge
           path: coverage.svg
           retention-days: 10
-      - name: Add comment to PR
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: mshick/add-pr-comment@v2
+          compression-level: 0
+      - name: Python Coverage Testgen 
+        uses: seahyinghang8/coverage-testgen@test
         with:
-          message: |
-            ![Coverage](${{steps.upload-coverage-badge-artifact-step.outputs.artifact-url}})
-            [Full report]](${{steps.upload-html-report-artifact-step.outputs.artifact-url}})
-
-        
+          coverageFile: coverage.xml
+          token: ${{ secrets.GITHUB_TOKEN }}

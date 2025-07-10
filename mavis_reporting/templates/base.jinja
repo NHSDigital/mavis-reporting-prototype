@@ -39,14 +39,17 @@
 {% block page_content %}
 {% endblock %}
 
+
 {% block session %}
-  <h3>session</h3>
-  <dl>
-  {% for key in session %}
-    <dt>{{ key }}</dt>
-      <dd>{{ session.get(key) }}</dd>
-  {% endfor %}
-  </dl>
+  <details>
+    <summary>session</summary>
+      <dl>
+      {% for key in session %}
+        <dt>{{ key }}</dt>
+          <dd>{{ session.get(key) }}</dd>
+      {% endfor %}
+      </dl>
+    </details>
 {% endblock %}
 
 {% endblock %}

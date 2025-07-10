@@ -105,8 +105,11 @@ jobs:
           path: coverage.svg
           retention-days: 10
           compression-level: 0
-      - name: Python Coverage Testgen 
-        uses: seahyinghang8/coverage-testgen@test
+      - name: Display coverage
+        uses: ewjoachim/coverage-comment-action@v1
         with:
-          coverageFile: coverage.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          MINIMUM_GREEN: 90
+          MINIMUM_ORANGE: 70
+          BADGE_ENABLED: "true"
+          COVERAGE_FILE: "coverage.xml"

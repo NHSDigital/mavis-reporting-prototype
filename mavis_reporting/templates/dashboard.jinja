@@ -1,0 +1,34 @@
+{% from "components/heading.jinja" import heading %}
+{% from "components/secondary_navigation.jinja" import secondaryNavigation %}
+
+{% extends 'base.jinja' %}
+
+{% block page_content %}
+
+{{ heading({
+  "text": "Midlands",
+  "level": 1,
+  "size": "xl",
+  "caption": "Region",
+}) }}
+
+{{ secondaryNavigation({
+  "items": [
+    {
+      "text": "Overview",
+      "current": true if page == "region",
+      "href": "/"
+    },
+    {
+      "text": "Providers",
+      "current": true if page == "providers",
+      "href": "/providers"
+    }
+  ]
+}) }}
+
+{% block dashboard_content %}
+
+{% endblock %}
+
+{% endblock %}

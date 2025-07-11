@@ -1,0 +1,87 @@
+{% from "tables/macro.jinja" import table %}
+{% from "components/heading.jinja" import heading %}
+{% from "components/secondary_navigation.jinja" import secondaryNavigation %}
+{% from "card/macro.jinja" import card %}
+{% from "components/filters.jinja" import filters %}
+
+{% extends 'dashboard.jinja' %}
+
+{% block pageTitle %}Providers | Manage vaccinations in schools{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="nhsuk-grid-row">
+  <div class="app-grid-column-filters">
+    {{ filters({
+      "programmes": programmes,
+      "year_groups": year_groups,
+      "genders": genders
+    }) }}
+  </div>
+
+  <div class="app-grid-column-content">
+    {{ table({
+      "heading": "Providers",
+      "tableClasses": "nhsuk-table--data",
+      "panel": true,
+      "head": [
+        { "text": "Provider" },
+        { "text": "Dates done", "format": "numeric", "classes": "nhsuk-table__section-start"},
+        { "text": "Eligible cohort", "format": "numeric" },
+        { "text": "Consent given", "format": "numeric", "classes": "nhsuk-table__section-start" },
+        { "text": "Consent refused", "format": "numeric" },
+        { "text": "Vaccinated", "format": "numeric", "classes": "nhsuk-table__section-start" },
+        { "text": "Uptake", "format": "numeric" }
+      ],
+      "rows": [
+        [
+          { "text": "NHS Hospital Trust A" },
+          { "text": "12", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "1,250", "format": "numeric" },
+          { "text": "1,180", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "45", "format": "numeric" },
+          { "text": "1,135", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "90.8%", "format": "numeric" }
+        ],
+        [
+          { "text": "NHS Hospital Trust B" },
+          { "text": "8", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "980", "format": "numeric" },
+          { "text": "920", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "32", "format": "numeric" },
+          { "text": "888", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "90.6%", "format": "numeric" }
+        ],
+        [
+          { "text": "NHS Community Trust C" },
+          { "text": "15", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "1,650", "format": "numeric" },
+          { "text": "1,520", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "78", "format": "numeric" },
+          { "text": "1,442", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "87.4%", "format": "numeric" }
+        ],
+        [
+          { "text": "NHS Community Trust D" },
+          { "text": "6", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "720", "format": "numeric" },
+          { "text": "680", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "28", "format": "numeric" },
+          { "text": "652", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "90.6%", "format": "numeric" }
+        ],
+        [
+          { "text": "NHS Hospital Trust E" },
+          { "text": "10", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "1,100", "format": "numeric" },
+          { "text": "1,045", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "38", "format": "numeric" },
+          { "text": "1,007", "format": "numeric", "classes": "nhsuk-table__section-start" },
+          { "text": "91.5%", "format": "numeric" }
+        ]
+      ]
+    }) }}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% from "radios/macro.jinja" import radios %}
+{% from "select/macro.jinja" import select %}
+{% from "checkboxes/macro.jinja" import checkboxes %}
+{% from "fieldset/macro.jinja" import fieldset %}
+
+{% macro filters(params) %}
+<form>
+  {% call fieldset({
+    "legend": {
+      "text": "Filter data",
+      "classes": "nhsuk-heading-m app-control-container__legend",
+      "isPageHeading": false
+    },
+    "classes": "nhsuk-card app-control-container"
+  }) %}
+
+    <div class="app-control">
+      {{ radios({
+        "idPrefix": "programme",
+        "name": "programme",
+        "fieldset": {
+          "legend": {
+            "text": "Vaccine programme",
+            "classes": "nhsuk-fieldset__legend--s"
+          }
+        },
+        "items": params.programmes
+      }) }}
+    </div>
+
+    <div class="app-control">
+      {{ select({
+        "id": "time-period",
+        "name": "time-period",
+        "classes": "app-control--full",
+        "label": {
+          "text": "Time period",
+          "classes": "nhsuk-fieldset__legend--s"
+        },
+        "items": [
+          {
+            "value": "September",
+            "text": "September 2025",
+          },
+          {
+            "value": "October",
+            "text": "October 2025",
+          },
+          {
+            "value": "November",
+            "text": "November 2025",
+            "selected": true,
+          }
+        ]
+      }) }}
+    </div>
+
+    <div class="app-control">
+      {{ checkboxes({
+        "idPrefix": "gender",
+        "name": "gender",
+        "fieldset": {
+          "legend": {
+            "text": "Gender",
+            "classes": "nhsuk-fieldset__legend--s"
+          }
+        },
+        "items": params.genders
+      }) }}
+    </div>
+
+    <div class="app-control">
+      {{ checkboxes({
+        "idPrefix": "year-group",
+        "name": "year-group",
+        "fieldset": {
+          "legend": {
+            "text": "Year group",
+            "classes": "nhsuk-fieldset__legend--s"
+          }
+        },
+        "items": params.year_groups
+      }) }}
+    </div>
+  {% endcall %}
+</form>
+{% endmacro %}

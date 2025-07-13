@@ -10,12 +10,22 @@ main = Blueprint("main", __name__)
 
 @main.before_request
 def get_region():
-    """Get the region data from the API and store it in the g object."""
+    """Get core data from the API and store it in the global g object."""
     api = MavisAPI()
     g.region = api.region()
     g.programmes = api.programmes()
     g.year_groups = api.year_groups()
     g.genders = api.genders()
+
+
+@main.context_processor
+def inject_mavis_data():
+    """Inject Mavis variables used to filter data into the template context."""
+    return {
+        "programmes": g.programmes,
+        "year_groups": g.year_groups,
+        "genders": g.genders,
+    }
 
 
 @main.route("/")
@@ -47,9 +57,6 @@ def region(code):
         title=g.region.name,
         org_type_title="Region",
         organisation=g.region,
-        programmes=g.programmes,
-        year_groups=g.year_groups,
-        genders=g.genders,
         secondary_navigation_items=secondary_navigation_items,
     )
 
@@ -79,9 +86,6 @@ def region_providers(code):
         org_type_title="Region",
         region=g.region,
         providers=g.region.providers,
-        programmes=g.programmes,
-        year_groups=g.year_groups,
-        genders=g.genders,
         secondary_navigation_items=secondary_navigation_items,
     )
 
@@ -107,8 +111,5 @@ def provider(provider_code):
         title=provider.name,
         org_type_title="Provider",
         organisation=provider,
-        programmes=g.programmes,
-        year_groups=g.year_groups,
-        genders=g.genders,
         secondary_navigation_items=secondary_navigation_items,
     )

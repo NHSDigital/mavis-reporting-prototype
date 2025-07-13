@@ -1,10 +1,10 @@
 midlands = {
     "name": "Midlands",
-    "value": "midlands",
+    "code": "Y55",
     "providers": [
         {
             "name": "Coventry and Warwickshire Partnership Trust",
-            "value": "coventry-and-warwickshire-partnership-trust",
+            "code": "RYG",
             "schools": [
                 {"name": "Eden Girls' School, Coventry", "urn": "140958"},
                 {"name": "Grace Academy Coventry", "urn": "135335"},
@@ -21,8 +21,8 @@ midlands = {
             ],
         },
         {
-            "name": "Leicestershire Partnership NHS Trust ",
-            "value": "leicestershire-partnership-nhs-trust",
+            "name": "Leicestershire Partnership NHS Trust",
+            "code": "RT5",
             "schools": [
                 {"name": "De Lisle Catholic School Loughborough", "urn": "120304"},
                 {"name": "De Lisle College Loughborough", "urn": "138298"},
@@ -37,7 +37,7 @@ midlands = {
         },
         {
             "name": "Lincolnshire Community Health Services NHS Trust",
-            "value": "lincolnshire-community-health-services-nhs-trust",
+            "code": "RY5",
             "schools": [
                 {"name": "The Lincoln St Christopher's School", "urn": "120754"},
                 {"name": "Lincoln UTC", "urn": "140950"},

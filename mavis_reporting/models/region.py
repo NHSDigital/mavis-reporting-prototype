@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Region:
     def __init__(self, region: dict):
         self.name: str = region["name"]
-        self.value: str = region["value"]
+        self.code: str = region["code"]
         self.providers: list[Provider] = []
         self.fake_measures()
 
@@ -21,7 +21,7 @@ class Region:
 
     def provider(self, provider_value: str) -> Provider | None:
         for provider in self.providers:
-            if provider.value == provider_value:
+            if provider.code == provider_value:
                 return provider
         return None
 

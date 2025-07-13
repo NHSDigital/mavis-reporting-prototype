@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 class Provider:
     def __init__(self, provider: dict, region: Region = None):
         self.name: str = provider["name"]
-        self.value: str = provider["value"]
+        self.code: str = provider["code"]
         self.schools: List[School] = []
         self.region: Region = region
         self.fake_measures()
@@ -22,9 +22,9 @@ class Provider:
         self._fake_cohort_size: int = faker.eligible_cohort_size("provider")
         self._measures: dict[str, int] = faker.measures(self._fake_cohort_size)
 
-    def school(self, school_value: str) -> School | None:
+    def school(self, urn: str) -> School | None:
         for school in self.schools:
-            if school.value == school_value:
+            if school.urn == urn:
                 return school
         return None
 

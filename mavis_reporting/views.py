@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, redirect, url_for
 import logging
 
 from mavis_reporting.api.client import MavisAPI
@@ -20,8 +20,16 @@ def get_region():
 
 @main.route("/")
 def index():
+    return redirect(url_for("main.region", code=g.region.code))
+
+
+@main.route("/region/<code>")
+def region(code):
+    if code != g.region.code:
+        return redirect(url_for("main.region", code=g.region.code))
+
     return render_template(
-        "index.jinja",
+        "region.jinja",
         page="region",
         title=g.region.name,
         region=g.region,
@@ -31,8 +39,11 @@ def index():
     )
 
 
-@main.route("/providers")
-def providers():
+@main.route("/region/<code>/providers")
+def providers(code):
+    if code != g.region.code:
+        return redirect(url_for("main.providers", code=g.region.code))
+
     return render_template(
         "providers.jinja",
         page="providers",

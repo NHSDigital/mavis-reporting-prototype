@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
+from flask import url_for
+
 from mavis_reporting.helpers.measure_faker_helper import MeasureFaker
 
 if TYPE_CHECKING:
@@ -18,6 +20,9 @@ class Region:
         faker = MeasureFaker(self.name)
         self._fake_cohort_size: int = faker.eligible_cohort_size("region")
         self._measures: dict[str, int] = faker.measures(self._fake_cohort_size)
+
+    def url(self) -> str:
+        return url_for("main.region", code=self.code)
 
     def provider(self, provider_value: str) -> Provider | None:
         for provider in self.providers:

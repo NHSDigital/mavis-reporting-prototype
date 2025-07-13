@@ -56,11 +56,13 @@ def region_providers(code):
         return redirect(url_for("main.region_providers", code=g.region.code))
 
     return render_template(
-        "region_providers.jinja",
+        "organisation_children.jinja",
         title=g.region.name,
         org_type_title="Region",
-        region=g.region,
-        providers=g.region.providers,
+        child_type_title_singular="Provider",
+        child_type_title_plural="Providers",
+        organisation=g.region,
+        children=g.region.providers,
         secondary_navigation_items=generate_secondary_nav_items(
             "region", g.region.code, "region_providers"
         ),
@@ -80,5 +82,42 @@ def provider(code):
         organisation=provider,
         secondary_navigation_items=generate_secondary_nav_items(
             "provider", code, "provider"
+        ),
+    )
+
+
+@main.route("/providers/<code>/schools")
+def provider_schools(code):
+    provider = g.region.provider(code)
+    if not provider:
+        return "Provider not found", 404
+
+    return render_template(
+        "organisation_children.jinja",
+        title=provider.name,
+        org_type_title="Provider",
+        child_type_title_singular="School",
+        child_type_title_plural="Schools",
+        organisation=provider,
+        children=provider.schools,
+        secondary_navigation_items=generate_secondary_nav_items(
+            "provider", code, "provider_schools"
+        ),
+    )
+
+
+@main.route("/schools/<urn>")
+def school(urn):
+    school = provider.school(urn)
+    if not school:
+        return "School not found", 404
+
+    return render_template(
+        "organisation.jinja",
+        title=school.name,
+        org_type_title="School",
+        organisation=school,
+        secondary_navigation_items=generate_secondary_nav_items(
+            "school", urn, "school"
         ),
     )

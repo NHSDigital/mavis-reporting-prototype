@@ -24,7 +24,7 @@ class MeasureFaker:
 
         measures = {}
 
-        sessions = round(eligible_cohort_size / 100)
+        sessions = round(eligible_cohort_size / 300)
         measures["sessions_completed"] = self.rng.randint(
             round(performance * sessions / 2 / 100),
             round(performance * sessions / 100),

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
 
+from flask import url_for
+
 from mavis_reporting.helpers.measure_faker_helper import MeasureFaker
 
 if TYPE_CHECKING:
@@ -21,6 +23,9 @@ class Provider:
         faker = MeasureFaker(self.name)
         self._fake_cohort_size: int = faker.eligible_cohort_size("provider")
         self._measures: dict[str, int] = faker.measures(self._fake_cohort_size)
+
+    def url(self) -> str:
+        return url_for("main.provider", code=self.code)
 
     def school(self, urn: str) -> School | None:
         for school in self.schools:

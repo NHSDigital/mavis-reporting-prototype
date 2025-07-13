@@ -18,25 +18,25 @@
   </div>
 
   {% set rows = [] %}
-  {% for provider in providers %}
+  {% for child in children %}
     {% set _ = rows.append([
-      { "text": provider.name, "href": url_for("main.provider", provider_code=provider.code) },
-      { "text": provider.measure_value('sessions_completed') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
-      { "text": provider.measure_value('eligible_cohort') | thousands, "format": "numeric" },
-      { "text": provider.measure_value('consent_given') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
-      { "text": provider.measure_value('consent_refused') | thousands, "format": "numeric" },
-      { "text": provider.measure_value('vaccinated') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
-      { "text": provider.measure_value('uptake') | percentage, "format": "numeric", "classes": "nhsuk-table__cell--bold" }
+      { "text": child.name, "href": child.url() },
+      { "text": child.measure_value('sessions_completed') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": child.measure_value('eligible_cohort') | thousands, "format": "numeric" },
+      { "text": child.measure_value('consent_given') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": child.measure_value('consent_refused') | thousands, "format": "numeric" },
+      { "text": child.measure_value('vaccinated') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": child.measure_value('uptake') | percentage, "format": "numeric", "classes": "nhsuk-table__cell--bold" }
     ]) %}
   {% endfor %}
 
   <div class="app-grid-column-content">
     {{ table({
-      "heading": "Providers",
+      "heading": child_type_title_plural,
       "tableClasses": "nhsuk-table--data",
       "panel": true,
       "head": [
-        { "text": "Provider" },
+        { "text": child_type_title_singular },
         { "text": "Dates done", "format": "numeric", "classes": "nhsuk-table__section-start"},
         { "text": "Eligible cohort", "format": "numeric" },
         { "text": "Consent given", "format": "numeric", "classes": "nhsuk-table__section-start" },

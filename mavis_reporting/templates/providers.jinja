@@ -19,6 +19,19 @@
     }) }}
   </div>
 
+  {% set rows = [] %}
+  {% for provider in providers %}
+    {% set _ = rows.append([
+      { "text": provider.name },
+      { "text": provider.measure_value('sessions_completed') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": provider.measure_value('eligible_cohort') | thousands, "format": "numeric" },
+      { "text": provider.measure_value('consent_given') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": provider.measure_value('consent_refused') | thousands, "format": "numeric" },
+      { "text": provider.measure_value('vaccinated') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": provider.measure_value('uptake') | percentage, "format": "numeric", "classes": "nhsuk-table__cell--bold" }
+    ]) %}
+  {% endfor %}
+
   <div class="app-grid-column-content">
     {{ table({
       "heading": "Providers",
@@ -33,53 +46,7 @@
         { "text": "Vaccinated", "format": "numeric", "classes": "nhsuk-table__section-start" },
         { "text": "Uptake", "format": "numeric" }
       ],
-      "rows": [
-        [
-          { "text": "NHS Hospital Trust A" },
-          { "text": "12", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "1,250", "format": "numeric" },
-          { "text": "1,180", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "45", "format": "numeric" },
-          { "text": "1,135", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "90.8%", "format": "numeric" }
-        ],
-        [
-          { "text": "NHS Hospital Trust B" },
-          { "text": "8", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "980", "format": "numeric" },
-          { "text": "920", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "32", "format": "numeric" },
-          { "text": "888", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "90.6%", "format": "numeric" }
-        ],
-        [
-          { "text": "NHS Community Trust C" },
-          { "text": "15", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "1,650", "format": "numeric" },
-          { "text": "1,520", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "78", "format": "numeric" },
-          { "text": "1,442", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "87.4%", "format": "numeric" }
-        ],
-        [
-          { "text": "NHS Community Trust D" },
-          { "text": "6", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "720", "format": "numeric" },
-          { "text": "680", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "28", "format": "numeric" },
-          { "text": "652", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "90.6%", "format": "numeric" }
-        ],
-        [
-          { "text": "NHS Hospital Trust E" },
-          { "text": "10", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "1,100", "format": "numeric" },
-          { "text": "1,045", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "38", "format": "numeric" },
-          { "text": "1,007", "format": "numeric", "classes": "nhsuk-table__section-start" },
-          { "text": "91.5%", "format": "numeric" }
-        ]
-      ]
+      "rows": rows
     }) }}
   </div>
 </div>

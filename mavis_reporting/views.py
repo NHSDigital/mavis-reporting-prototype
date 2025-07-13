@@ -28,29 +28,87 @@ def region(code):
     if code != g.region.code:
         return redirect(url_for("main.region", code=g.region.code))
 
+    secondary_navigation_items = [
+        {
+            "text": "Overview",
+            "current": True,
+            "href": url_for("main.region", code=g.region.code),
+        },
+        {
+            "text": "Providers",
+            "current": False,
+            "href": url_for("main.region_providers", code=g.region.code),
+        },
+    ]
+
     return render_template(
-        "region.jinja",
+        "organisation.jinja",
         page="region",
         title=g.region.name,
-        region=g.region,
+        org_type_title="Region",
+        organisation=g.region,
         programmes=g.programmes,
         year_groups=g.year_groups,
         genders=g.genders,
+        secondary_navigation_items=secondary_navigation_items,
     )
 
 
 @main.route("/region/<code>/providers")
-def providers(code):
+def region_providers(code):
     if code != g.region.code:
-        return redirect(url_for("main.providers", code=g.region.code))
+        return redirect(url_for("main.region_providers", code=g.region.code))
+
+    secondary_navigation_items = [
+        {
+            "text": "Overview",
+            "current": False,
+            "href": url_for("main.region", code=g.region.code),
+        },
+        {
+            "text": "Providers",
+            "current": True,
+            "href": url_for("main.region_providers", code=g.region.code),
+        },
+    ]
 
     return render_template(
-        "providers.jinja",
+        "region_providers.jinja",
         page="providers",
         title=g.region.name,
+        org_type_title="Region",
         region=g.region,
         providers=g.region.providers,
         programmes=g.programmes,
         year_groups=g.year_groups,
         genders=g.genders,
+        secondary_navigation_items=secondary_navigation_items,
+    )
+
+
+@main.route("/providers/<provider_code>")
+def provider(provider_code):
+    provider = g.region.provider(provider_code)
+    if not provider:
+        return "Provider not found", 404
+
+    secondary_navigation_items = [
+        {
+            "text": "Overview",
+            "current": True,
+            "href": url_for("main.provider", provider_code=provider_code),
+        },
+        {"text": "Schools", "current": False, "href": "#"},
+    ]
+
+    return render_template(
+        "organisation.jinja",
+        page="provider",
+        title=provider.name,
+        org_type_title="Provider",
+        organisation=provider,
+        programmes=g.programmes,
+        year_groups=g.year_groups,
+        genders=g.genders,
+        secondary_navigation_items=secondary_navigation_items,
     )

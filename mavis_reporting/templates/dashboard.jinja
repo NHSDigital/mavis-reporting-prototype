@@ -9,22 +9,11 @@
   "text": title,
   "level": 1,
   "size": "xl",
-  "caption": "Region",
+  "caption": org_type_title,
 }) }}
 
 {{ secondaryNavigation({
-  "items": [
-    {
-      "text": "Overview",
-      "current": true if page == "region",
-      "href": "/"
-    },
-    {
-      "text": "Providers",
-      "current": true if page == "providers",
-      "href": "/region/" + region.code + "/providers"
-    }
-  ]
+  "items": secondary_navigation_items
 }) }}
 
 {% block dashboard_content %}

@@ -1,12 +1,10 @@
-{% from "tables/macro.jinja" import table %}
-{% from "components/heading.jinja" import heading %}
-{% from "components/secondary_navigation.jinja" import secondaryNavigation %}
+{% from "components/table.jinja" import table %}
 {% from "card/macro.jinja" import card %}
 {% from "components/filters.jinja" import filters %}
 
 {% extends 'dashboard.jinja' %}
 
-{% block pageTitle %}Providers | Manage vaccinations in schools{% endblock %}
+{% block pageTitle %}{{ region.name }} providers | Manage vaccinations in schools{% endblock %}
 
 {% block dashboard_content %}
 
@@ -22,7 +20,7 @@
   {% set rows = [] %}
   {% for provider in providers %}
     {% set _ = rows.append([
-      { "text": provider.name },
+      { "text": provider.name, "href": url_for("main.provider", provider_code=provider.code) },
       { "text": provider.measure_value('sessions_completed') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
       { "text": provider.measure_value('eligible_cohort') | thousands, "format": "numeric" },
       { "text": provider.measure_value('consent_given') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },

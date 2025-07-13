@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, g, redirect, url_for
 import logging
 
 from mavis_reporting.api.client import MavisAPI
+from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_items
 
 logger = logging.getLogger(__name__)
 
@@ -38,26 +39,14 @@ def region(code):
     if code != g.region.code:
         return redirect(url_for("main.region", code=g.region.code))
 
-    secondary_navigation_items = [
-        {
-            "text": "Overview",
-            "current": True,
-            "href": url_for("main.region", code=g.region.code),
-        },
-        {
-            "text": "Providers",
-            "current": False,
-            "href": url_for("main.region_providers", code=g.region.code),
-        },
-    ]
-
     return render_template(
         "organisation.jinja",
-        page="region",
         title=g.region.name,
         org_type_title="Region",
         organisation=g.region,
-        secondary_navigation_items=secondary_navigation_items,
+        secondary_navigation_items=generate_secondary_nav_items(
+            "region", g.region.code, "region"
+        ),
     )
 
 
@@ -66,50 +55,30 @@ def region_providers(code):
     if code != g.region.code:
         return redirect(url_for("main.region_providers", code=g.region.code))
 
-    secondary_navigation_items = [
-        {
-            "text": "Overview",
-            "current": False,
-            "href": url_for("main.region", code=g.region.code),
-        },
-        {
-            "text": "Providers",
-            "current": True,
-            "href": url_for("main.region_providers", code=g.region.code),
-        },
-    ]
-
     return render_template(
         "region_providers.jinja",
-        page="providers",
         title=g.region.name,
         org_type_title="Region",
         region=g.region,
         providers=g.region.providers,
-        secondary_navigation_items=secondary_navigation_items,
+        secondary_navigation_items=generate_secondary_nav_items(
+            "region", g.region.code, "region_providers"
+        ),
     )
 
 
-@main.route("/providers/<provider_code>")
-def provider(provider_code):
-    provider = g.region.provider(provider_code)
+@main.route("/providers/<code>")
+def provider(code):
+    provider = g.region.provider(code)
     if not provider:
         return "Provider not found", 404
 
-    secondary_navigation_items = [
-        {
-            "text": "Overview",
-            "current": True,
-            "href": url_for("main.provider", provider_code=provider_code),
-        },
-        {"text": "Schools", "current": False, "href": "#"},
-    ]
-
     return render_template(
         "organisation.jinja",
-        page="provider",
         title=provider.name,
         org_type_title="Provider",
         organisation=provider,
-        secondary_navigation_items=secondary_navigation_items,
+        secondary_navigation_items=generate_secondary_nav_items(
+            "provider", code, "provider"
+        ),
     )

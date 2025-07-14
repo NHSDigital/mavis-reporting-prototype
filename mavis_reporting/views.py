@@ -15,7 +15,15 @@ def get_region():
     """Get core data from the API and store it in the global g object."""
     api = MavisAPI()
     g.region = api.region()
-    g.programmes = api.programmes()
+    logger.warning(api.programmes())
+    g.programmes = [
+        {
+            "value": programme["code"],
+            "text": programme["text"],
+            "checked": True if programme["code"] == "hpv" else False,
+        }
+        for programme in api.programmes()
+    ]
     g.year_groups = api.year_groups()
     g.genders = api.genders()
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g, redirect, url_for
+from flask import Blueprint, render_template, g, redirect, url_for, abort
 import logging
 
 from mavis_reporting.api.client import MavisAPI
@@ -63,7 +63,7 @@ def region(code):
 @main.route("/region/<code>/providers")
 def region_providers(code):
     if code != g.region.code:
-        return redirect(url_for("main.region_providers", code=g.region.code))
+        abort(404)
 
     return render_template(
         "organisation_children.jinja",
@@ -84,7 +84,7 @@ def region_providers(code):
 def provider(code):
     provider = g.region.provider(code)
     if not provider:
-        return "Provider not found", 404
+        abort(404)
 
     return render_template(
         "organisation.jinja",
@@ -102,7 +102,7 @@ def provider(code):
 def provider_schools(code):
     provider = g.region.provider(code)
     if not provider:
-        return "Provider not found", 404
+        abort(404)
 
     return render_template(
         "organisation_children.jinja",
@@ -123,7 +123,7 @@ def provider_schools(code):
 def school(code):
     school = g.region.school(code)
     if not school:
-        return "School not found", 404
+        abort(404)
 
     return render_template(
         "organisation.jinja",
@@ -135,3 +135,8 @@ def school(code):
             "school", code, "school"
         ),
     )
+
+
+@main.errorhandler(404)
+def page_not_found(e):
+    return render_template("errors/404.html"), 404

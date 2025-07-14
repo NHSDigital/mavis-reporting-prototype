@@ -39,7 +39,7 @@ def generate_secondary_nav_items(organisation_type: str, code: str, current_page
                 {
                     "text": "Overview",
                     "current": current_page == "school",
-                    "href": url_for("main.school", urn=code),
+                    "href": url_for("main.school", code=code),
                 }
             )
         case _:

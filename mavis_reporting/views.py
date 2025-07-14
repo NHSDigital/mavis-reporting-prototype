@@ -106,9 +106,9 @@ def provider_schools(code):
     )
 
 
-@main.route("/schools/<urn>")
-def school(urn):
-    school = g.region.school(urn)
+@main.route("/schools/<code>")
+def school(code):
+    school = g.region.school(code)
     if not school:
         return "School not found", 404
 
@@ -118,6 +118,6 @@ def school(urn):
         org_type_title="School",
         organisation=school,
         secondary_navigation_items=generate_secondary_nav_items(
-            "school", urn, "school"
+            "school", code, "school"
         ),
     )

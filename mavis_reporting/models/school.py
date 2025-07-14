@@ -7,13 +7,15 @@ from mavis_reporting.helpers.measure_faker_helper import MeasureFaker
 
 if TYPE_CHECKING:
     from mavis_reporting.models.provider import Provider
+    from mavis_reporting.models.region import Region
 
 
 class School:
-    def __init__(self, school: dict, provider: Provider = None):
+    def __init__(self, school: dict, provider: Provider = None, region: Region = None):
         self.name: str = school["name"]
         self.urn: str = school["urn"]
         self.provider: Provider = provider
+        self.region: Region = region
         self.fake_measures()
 
     def fake_measures(self) -> None:

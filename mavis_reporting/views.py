@@ -108,7 +108,7 @@ def provider_schools(code):
 
 @main.route("/schools/<urn>")
 def school(urn):
-    school = provider.school(urn)
+    school = g.region.school(urn)
     if not school:
         return "School not found", 404
 

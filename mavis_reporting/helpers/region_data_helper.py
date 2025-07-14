@@ -12,29 +12,20 @@ def process_region_data(data: dict) -> Region:
     Returns:
         Region: A Region instance with its associated providers and schools
     """
-    # Create the region instance
     region = Region(data)
 
-    # Initialize providers list for the region
     region.providers = []
+    region.schools = []
 
-    # Process each provider in the region data
     for provider_data in data["providers"]:
-        # Create provider instance with back-reference to parent region
         provider = Provider(provider_data, region=region)
-
-        # Initialize schools list for the provider
         provider.schools = []
 
-        # Process each school in the provider data
         for school_data in provider_data["schools"]:
-            # Create school instance with back-reference to parent provider
-            school = School(school_data, provider=provider)
-
-            # Add school to provider's schools list
+            school = School(school_data, provider=provider, region=region)
             provider.schools.append(school)
+            region.schools.append(school)
 
-        # Add provider to region's providers list
         region.providers.append(provider)
 
     return region

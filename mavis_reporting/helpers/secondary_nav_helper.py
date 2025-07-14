@@ -34,6 +34,14 @@ def generate_secondary_nav_items(organisation_type: str, code: str, current_page
                     "href": url_for("main.provider_schools", code=code),
                 }
             )
+        case "school":
+            items.append(
+                {
+                    "text": "Overview",
+                    "current": current_page == "school",
+                    "href": url_for("main.school", urn=code),
+                }
+            )
         case _:
             raise ValueError(f"Invalid organisation type: {organisation_type}")
 

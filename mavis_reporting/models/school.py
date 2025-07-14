@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class School(Organisation):
-    def __init__(self, school: dict, provider: Provider = None, region: Region = None):
+    def __init__(self, school: dict, provider: Provider, region: Region = None):
         super().__init__(school)
         self.code: str = school["code"]
         self.provider: Provider = provider

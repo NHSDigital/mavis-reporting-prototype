@@ -23,7 +23,7 @@ def process_region_data(data: dict) -> Region:
 
         for school_data in provider_data["schools"]:
             school_data["code"] = school_data["urn"]
-            school = School(school_data, provider=provider, region=region)
+            school = School(school_data, provider, region=region)
             provider.schools.append(school)
             region.schools.append(school)
 

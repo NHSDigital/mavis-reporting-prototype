@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, g, redirect, url_for
 import logging
 
 from mavis_reporting.api.client import MavisAPI
+from mavis_reporting.helpers.breacrumb_helper import generate_breadcrumb_items
 from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_items
 
 logger = logging.getLogger(__name__)
@@ -44,6 +45,7 @@ def region(code):
         title=g.region.name,
         org_type_title="Region",
         organisation=g.region,
+        breadcrumb_items=generate_breadcrumb_items([g.region]),
         secondary_navigation_items=generate_secondary_nav_items(
             "region", g.region.code, "region"
         ),
@@ -63,6 +65,7 @@ def region_providers(code):
         child_type_title_plural="Providers",
         organisation=g.region,
         children=g.region.providers,
+        breadcrumb_items=generate_breadcrumb_items([g.region]),
         secondary_navigation_items=generate_secondary_nav_items(
             "region", g.region.code, "region_providers"
         ),
@@ -80,6 +83,7 @@ def provider(code):
         title=provider.name,
         org_type_title="Provider",
         organisation=provider,
+        breadcrumb_items=generate_breadcrumb_items([g.region, provider]),
         secondary_navigation_items=generate_secondary_nav_items(
             "provider", code, "provider"
         ),
@@ -100,6 +104,7 @@ def provider_schools(code):
         child_type_title_plural="Schools",
         organisation=provider,
         children=provider.schools,
+        breadcrumb_items=generate_breadcrumb_items([g.region, provider]),
         secondary_navigation_items=generate_secondary_nav_items(
             "provider", code, "provider_schools"
         ),
@@ -117,6 +122,7 @@ def school(code):
         title=school.name,
         org_type_title="School",
         organisation=school,
+        breadcrumb_items=generate_breadcrumb_items([g.region, school.provider, school]),
         secondary_navigation_items=generate_secondary_nav_items(
             "school", code, "school"
         ),

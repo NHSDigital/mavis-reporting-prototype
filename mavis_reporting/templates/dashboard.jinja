@@ -1,7 +1,14 @@
 {% from "components/heading.jinja" import heading %}
 {% from "components/secondary_navigation.jinja" import secondaryNavigation %}
+{% from "breadcrumb/macro.jinja" import breadcrumb %}
 
 {% extends 'base.jinja' %}
+
+{% block beforeContent %}
+  {{ breadcrumb({
+    "items": breadcrumb_items
+  }) }}
+{% endblock %}
 
 {% block page_content %}
 

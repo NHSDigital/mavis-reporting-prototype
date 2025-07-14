@@ -1,6 +1,7 @@
 {% from "radios/macro.jinja" import radios %}
 {% from "select/macro.jinja" import select %}
 {% from "checkboxes/macro.jinja" import checkboxes %}
+{% from "input/macro.jinja" import input %}
 {% from "fieldset/macro.jinja" import fieldset %}
 
 {% macro filters(params) %}
@@ -29,29 +30,30 @@
     </div>
 
     <div class="app-control">
-      {{ select({
-        "id": "time-period",
-        "name": "time-period",
-        "classes": "app-control--full",
+      {{ input({
+        "id": "date-from",
+        "name": "date-from",
         "label": {
-          "text": "Time period",
-          "classes": "nhsuk-fieldset__legend--s"
+          "text": "Date from"
         },
-        "items": [
-          {
-            "value": "September",
-            "text": "September 2025",
-          },
-          {
-            "value": "October",
-            "text": "October 2025",
-          },
-          {
-            "value": "November",
-            "text": "November 2025",
-            "selected": true,
-          }
-        ]
+        "attributes": {
+          "placeholder": "e.g. 01/09/2024"
+        },
+        "classes": "nhsuk-input--width-10"
+      }) }}
+    </div>
+
+    <div class="app-control">
+      {{ input({
+        "id": "date-to",
+        "name": "date-to",
+        "label": {
+          "text": "Date to"
+        },
+        "attributes": {
+          "placeholder": "e.g. 31/12/2024"
+        },
+        "classes": "nhsuk-input--width-10"
       }) }}
     </div>
 

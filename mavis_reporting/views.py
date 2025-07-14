@@ -59,7 +59,7 @@ def region_providers(code):
 
     return render_template(
         "organisation_children.jinja",
-        title=g.region.name,
+        title=f"Providers - {g.region.name}",
         org_type_title="Region",
         child_type_title_singular="Provider",
         child_type_title_plural="Providers",
@@ -98,7 +98,7 @@ def provider_schools(code):
 
     return render_template(
         "organisation_children.jinja",
-        title=provider.name,
+        title=f"Schools - {provider.name}",
         org_type_title="Provider",
         child_type_title_singular="School",
         child_type_title_plural="Schools",

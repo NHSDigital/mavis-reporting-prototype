@@ -1,7 +1,3 @@
-# include scripts/init.mk
-
-# ==============================================================================
-
 .PHONY: clean
 clean:
 	@rm -f sentinel
@@ -28,3 +24,11 @@ dev: install
 	@echo "Starting development servers ..."
 	@echo "Press Ctrl+C to stop all processes"
 	@poetry run honcho start -f Procfile.dev
+
+.PHONY: test
+test:
+	@true
+
+.PHONY: test-coverage
+test-coverage:
+	@true

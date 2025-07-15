@@ -53,6 +53,10 @@ jobs:
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
+      - name: "Install dependencies"
+        uses: jdx/mise-action@v2
+        with:
+          cache: true
       - name: "Run linting"
         run: |
           make lint

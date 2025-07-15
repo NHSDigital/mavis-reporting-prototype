@@ -26,18 +26,8 @@
     <div class="nhsuk-card-group nhsuk-grid-row app-card-group">
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
-          "classes": "app-card app-card--reversed",
-          "heading": "Uptake",
-          "headingClasses": "nhsuk-heading-xs",
-          "headingLevel": 3,
-          "description": organisation.measure_value('uptake') | percentage
-        }) }}
-      </div>
-
-      <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
-        {{ card({
           "classes": "app-card",
-          "heading": "Cohort",
+          "heading": "Eligible cohort",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
           "description": organisation.measure_value('eligible_cohort') | thousands
@@ -51,6 +41,16 @@
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
           "description": organisation.measure_value('vaccinated') | thousands
+        }) }}
+      </div>
+
+      <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
+        {{ card({
+          "classes": "app-card app-card--reversed",
+          "heading": "Uptake",
+          "headingClasses": "nhsuk-heading-xs",
+          "headingLevel": 3,
+          "description": organisation.measure_value('uptake') | percentage
         }) }}
       </div>
 

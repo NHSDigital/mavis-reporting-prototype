@@ -41,3 +41,10 @@ test-coverage:
 copy-nhsuk-favicons:
 	mkdir -p mavis_reporting/static/favicons
 	cp -r node_modules/nhsuk-frontend/packages/assets/favicons/* mavis_reporting/static/favicons/
+
+build-docker:
+	docker build  -f ./infrastructure/images/mavis-reporting/Dockerfile -t ${DOCKER_IMAGE} .
+
+.PHONY: run-docker
+run-docker:
+	docker run -p ${HOST_PORT}:5000 ${DOCKER_IMAGE}

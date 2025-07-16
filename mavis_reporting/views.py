@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, g, redirect, url_for, abort
+from healthcheck import HealthCheck
+
 import logging
 
 from mavis_reporting.api.client import MavisAPI
@@ -140,3 +142,8 @@ def school(code):
 @main.errorhandler(404)
 def page_not_found(e):
     return render_template("errors/404.html"), 404
+
+
+@main.route("/healthcheck")
+def healthcheck():
+    return HealthCheck().run()

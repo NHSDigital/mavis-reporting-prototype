@@ -1,57 +1,47 @@
-from __future__ import annotations
-from typing import TYPE_CHECKING, List
-
-if TYPE_CHECKING:
-    from mavis_reporting.models.measure import Measure
-
-
-provider_measures: List[Measure] = [
-    {
-        "text": "Sessions completed",
+measures = {
+    "sessions_completed": {
+        "name": "Sessions completed",
         "description": "Number of sessions completed",
-        "value": "sessions_completed",
+        "code": "sessions_completed",
     },
-    {
-        "text": "Vaccinations",
+    "vaccinations": {
+        "name": "Vaccinations",
         "description": "Number of vaccinations administered",
-        "value": "vaccinations",
+        "code": "vaccinations",
     },
-]
-
-child_measures: List[Measure] = [
-    {
-        "text": "Eligible cohort",
+    "eligible_cohort": {
+        "name": "Eligible cohort",
         "description": "Number of children eligible for the vaccine in this programme year",
-        "value": "eligible_cohort",
+        "code": "eligible_cohort",
     },
-    {
-        "text": "Consent offered",
+    "consent_offered": {
+        "name": "Consent offered",
         "description": "Number of children offered asked to consent",
-        "value": "offered",
+        "code": "offered",
     },
-    {
-        "text": "Consent given",
+    "consent_given": {
+        "name": "Consent given",
         "description": "Number of children who have valid consent to receive the vaccine",
-        "value": "consent_given",
+        "code": "consent_given",
     },
-    {
-        "text": "Consent refused",
+    "consent_refused": {
+        "name": "Consent refused",
         "description": "Number of children for whom consent was refused",
-        "value": "refused",
+        "code": "refused",
     },
-    {
-        "text": "No response",
+    "no_response": {
+        "name": "No response",
         "description": "Number of children for whom no response was received",
-        "value": "no_response",
+        "code": "no_response",
     },
-    {
-        "text": "Outstanding",
+    "outstanding": {
+        "name": "Outstanding",
         "description": "Number of children with consent who have not yet received the vaccine",
-        "value": "outstanding",
+        "code": "outstanding",
     },
-    {
-        "text": "Vaccinated",
+    "vaccinated": {
+        "name": "Vaccinated",
         "description": "Number of children who have received the vaccine",
-        "value": "vaccinated",
+        "code": "vaccinated",
     },
-]
+}

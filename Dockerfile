@@ -2,13 +2,12 @@ FROM python:3.13-alpine AS builder
 
 WORKDIR /app
 
-ADD pyproject.toml poetry.lock /app/
+ADD package.json package-lock.json pyproject.toml poetry.lock Makefile /app/
 
-RUN apk add build-base libffi-dev
+RUN apk add build-base libffi-dev npm
 
 RUN pip install poetry
-RUN poetry config virtualenvs.in-project true
-RUN poetry install --no-ansi
+RUN make install
 
 
 FROM builder 
@@ -26,4 +25,4 @@ RUN adduser app -h /app -u 1000 -G app -DH
 # `1000`.
 USER 1000
 
-CMD ["/app/.venv/bin/gunicorn", "--bind", "0.0.0.0:5000", "mavis_reporting:create_app()"]
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5000", "mavis_reporting:create_app()"]

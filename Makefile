@@ -26,9 +26,16 @@ dev: install
 	@poetry run honcho start -f Procfile.dev
 
 .PHONY: test
-test:
-	@true
+test: install
+	@echo "Running all tests .."
+	@poetry run pytest tests --verbose 
 
 .PHONY: test-coverage
-test-coverage:
-	@true
+test-coverage: install
+	@echo "Checking coverage on all tests .."
+	@poetry run coverage run -m  pytest tests --verbose 
+	@poetry run coverage report --fail-under=${FAIL_IF_UNDER}
+	@poetry run coverage html
+	@poetry run coverage xml coverage.xml
+	@poetry run coverage-badge -o coverage.svg
+	

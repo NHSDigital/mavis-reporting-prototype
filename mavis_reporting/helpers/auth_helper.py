@@ -1,6 +1,4 @@
 from datetime import datetime, timedelta, timezone
-import logging
-import sys
 import urllib
 
 from flask import (

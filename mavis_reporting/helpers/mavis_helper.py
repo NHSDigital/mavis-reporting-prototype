@@ -3,9 +3,8 @@ import requests
 import urllib.parse
 import werkzeug
 
-from flask import abort, redirect, request
+from flask import redirect
 
-from werkzeug.exceptions import Unauthorized
 
 
 def mavis_url(current_app, path, params={}):

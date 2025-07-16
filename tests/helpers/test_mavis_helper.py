@@ -1,17 +1,12 @@
-import flask
 import json
 import pytest
-import requests
 import werkzeug
-import pdb
 
 from flask import current_app
-from unittest.mock import patch, Mock, call
-from werkzeug.exceptions import Unauthorized
+from unittest.mock import patch
 
 from mavis_reporting.helpers import mavis_helper
 
-from mavis_reporting import create_app
 
 
 def test_mavis_url_with_just_path(app):

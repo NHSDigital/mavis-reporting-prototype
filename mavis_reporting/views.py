@@ -15,7 +15,6 @@ def get_region():
     """Get core data from the API and store it in the global g object."""
     api = MavisAPI()
     g.region = api.region()
-    logger.warning(api.programmes())
     g.programmes = [
         {
             "value": programme["code"],

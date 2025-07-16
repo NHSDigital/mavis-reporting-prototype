@@ -15,7 +15,8 @@ class School(Organisation):
         self.code: str = school["code"]
         self.provider: Provider = provider
         self.region: Region = region
-        self.fake_measures("school")
+        self.type = "school"
+        self.fake_measures(self.type)
 
     def url(self) -> str:
         return url_for("main.school", code=self.code)

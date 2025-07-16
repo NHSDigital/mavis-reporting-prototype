@@ -13,8 +13,7 @@ RUN make install
 FROM builder 
 WORKDIR /app
 
-COPY --from=builder /app /app
-ADD . /app
+ADD ./mavis_reporting /app/mavis_reporting
 
 # Create a new group `app` with Group ID `1000`.
 RUN addgroup --gid 1000 app

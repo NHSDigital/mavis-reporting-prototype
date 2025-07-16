@@ -3,6 +3,28 @@
 .app-card {
   display: flex;
 
+  &[data-definition]::before {
+    background-color: $color_nhsuk-grey-1;
+    border-radius: 4px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.4);
+    color: $color_nhsuk-white;
+    content: attr(data-definition);
+    display: none;
+    font-size: 16px;
+    opacity: 0.92;
+    padding: 12px;
+    position: absolute;
+    transform: translateY(-110%);
+  }
+
+  &[data-definition]:hover {
+    border-color: $color_nhsuk-grey-3;
+
+    &::before {
+      display: block;
+    }
+  }
+
   .nhsuk-card__content {
     display: flex;
     flex-direction: column;

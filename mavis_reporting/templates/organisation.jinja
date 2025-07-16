@@ -30,7 +30,10 @@
           "heading": "Eligible cohort",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('eligible_cohort') | thousands
+          "description": organisation.measure_value('eligible_cohort') | thousands,
+          "attributes": {
+            "data-definition": "Number of children eligible for the vaccine in this programme year"
+          }
         }) }}
       </div>
 
@@ -40,7 +43,10 @@
           "heading": "Vaccinated",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('vaccinated') | thousands
+          "description": organisation.measure_value('vaccinated') | thousands,
+          "attributes": {
+            "data-definition": "Number of children who have received the vaccine in this programme year"
+          }
         }) }}
       </div>
 
@@ -50,7 +56,10 @@
           "heading": "Uptake",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('uptake') | percentage
+          "description": organisation.measure_value('uptake') | percentage,
+          "attributes": {
+            "data-definition": "Percentage of children who have received the vaccine in this programme year"
+          }
         }) }}
       </div>
 
@@ -60,7 +69,10 @@
           "heading": "Outstanding",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('outstanding') | thousands
+          "description": organisation.measure_value('outstanding') | thousands,
+          "attributes": {
+            "data-definition": "Number of children with consent who have not yet received the vaccine"
+          }
         }) }}
       </div>
     </div>
@@ -76,7 +88,10 @@
           "heading": "Offered",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_offered') | thousands
+          "description": organisation.measure_value('consent_offered') | thousands,
+          "attributes": {
+            "data-definition": "Number of children whose parents have been asked to consent"
+          }
         }) }}
       </div>
 
@@ -86,7 +101,10 @@
           "heading": "Consented",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_given') | thousands
+          "description": organisation.measure_value('consent_given') | thousands,
+          "attributes": {
+            "data-definition": "Number of children for whom consent has been given"
+          }
         }) }}
       </div>
 
@@ -96,7 +114,10 @@
           "heading": "Refused",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_refused') | thousands
+          "description": organisation.measure_value('consent_refused') | thousands,
+          "attributes": {
+            "data-definition": "Number of children for whom consent has been refused"
+          }
         }) }}
       </div>
 
@@ -106,7 +127,10 @@
           "heading": "No response",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('no_response') | thousands
+          "description": organisation.measure_value('no_response') | thousands,
+          "attributes": {
+            "data-definition": "Number of children who have not responded to the consent request"
+          }
         }) }}
       </div>
     </div>

@@ -2,11 +2,12 @@ import random
 
 
 class MeasureFaker:
-    def __init__(self, seed: str = None):
-        self.rng = random.Random(seed) if seed else random
+    def __init__(self, seed: str, organisation_type: str):
+        self.rng = random.Random(seed)
+        self.organisation_type = organisation_type
 
-    def eligible_cohort_size(self, type: str) -> int:
-        match type:
+    def eligible_cohort_size(self) -> int:
+        match self.organisation_type:
             case "region":
                 return self.rng.randint(85000, 150000)
             case "provider":
@@ -14,7 +15,7 @@ class MeasureFaker:
             case "school":
                 return self.rng.randint(500, 2000)
             case _:
-                raise ValueError(f"Invalid type: {type}")
+                raise ValueError(f"Invalid organisation type: {self.organisation_type}")
 
     def measures(self, eligible_cohort_size: int) -> dict[str, int]:
         """
@@ -25,10 +26,17 @@ class MeasureFaker:
         measures = {}
 
         sessions = round(eligible_cohort_size / 300)
+
         measures["sessions_completed"] = self.rng.randint(
             round(performance * sessions / 2 / 100),
             round(performance * sessions / 100),
         )
+
+        if not self.organisation_type == "school":
+            measures["schools"] = sessions
+            measures["schools_scheduled"] = round(performance / 100 * 0.92 * sessions)
+            measures["schools_notified"] = round(performance / 100 * 0.9 * sessions)
+            measures["schools_completed"] = round(performance / 100 * 0.8 * sessions)
 
         measures["consent_offered"] = round(eligible_cohort_size * 0.99)
         consent_given = round(eligible_cohort_size * performance / 100)
@@ -40,10 +48,14 @@ class MeasureFaker:
         )
 
         measures["vaccinated"] = round(consent_given * performance / 100)
-        measures["outstanding"] = round(
-            measures["consent_given"] - measures["vaccinated"]
+        measures["vaccinated_elsewhere"] = round(
+            (measures["vaccinated"] * (1 - performance / 100)) / 2
         )
-        measures["vaccinations"] = round(measures["vaccinated"] * 1.1)
-        measures["uptake"] = round(measures["vaccinated"] / eligible_cohort_size * 100)
+        measures["vaccinations"] = round(measures["vaccinated"] * 1.001)
+        measures["uptake"] = round(
+            (measures["vaccinated"] + measures["vaccinated_elsewhere"])
+            / eligible_cohort_size
+            * 100
+        )
 
         return measures

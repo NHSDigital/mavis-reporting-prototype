@@ -86,3 +86,13 @@ docker run --rm -p 5555:5000 -e GUNICORN_CMD_ARGS=--workers=5 mavis-reporting:la
 [2025-07-17 10:32:01 +0000] [13] [INFO] Booting worker with pid: 13
 [2025-07-17 10:32:01 +0000] [14] [INFO] Booting worker with pid: 14
 ```
+## Runtime dependencies
+
+This application authenticates using the main Mavis application, via an exchange of one-time-token/JWT with Mavis.
+To do this, it requires:
+
+1. A copy of the main Mavis app must be running and available at the URL given in the `MAVIS_ROOT_URL` env var
+2. That copy of Mavis must:
+   * include [this corresponding PR](https://github.com/nhsuk/manage-vaccinations-in-schools/pull/3866/)
+   * have the auth_token_by_header feature flag enabled
+   * have a value for `Settings.mavis_reporting_app.secret` (..which can also be set via the `MAVIS_REPORTING_APP__SECRET` environment variable) which matches this applications' `SECRET_KEY` value

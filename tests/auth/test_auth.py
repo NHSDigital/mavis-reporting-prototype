@@ -2,10 +2,8 @@ from datetime import datetime, timedelta, timezone
 from flask import session
 from unittest import mock
 
-import os
 import urllib.parse
 
-from mavis_reporting.helpers import auth_helper
 
 
 def it_redirects_to_mavis_start(response):

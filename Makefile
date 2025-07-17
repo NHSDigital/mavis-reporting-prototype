@@ -52,4 +52,4 @@ build-docker:
 
 .PHONY: run-docker
 run-docker:
-	docker run --rm -p ${HOST_PORT}:5000 ${DOCKER_IMAGE}
+	docker run --rm -p ${HOST_PORT}:5000 -e GUNICORN_CMD_ARGS=${GUNICORN_CMD_ARGS} ${DOCKER_IMAGE}

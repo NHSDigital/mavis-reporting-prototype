@@ -21,9 +21,10 @@
   {% for child in children %}
     {% set _ = rows.append([
       { "text": child.name, "href": child.url() },
-      { "text": child.measure_value('sessions_completed') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": child.measure_value('schools_completed') ~ " of " ~ child.measure_value('schools') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
       { "text": child.measure_value('eligible_cohort') | thousands, "format": "numeric" },
-      { "text": child.measure_value('consent_given') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": child.measure_value('consent_offered') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
+      { "text": child.measure_value('consent_given') | thousands, "format": "numeric" },
       { "text": child.measure_value('consent_refused') | thousands, "format": "numeric" },
       { "text": child.measure_value('vaccinated') | thousands, "format": "numeric", "classes": "nhsuk-table__section-start" },
       { "text": child.measure_value('uptake') | percentage, "format": "numeric", "classes": "nhsuk-table__cell--bold" }
@@ -37,9 +38,10 @@
       "panel": true,
       "head": [
         { "text": child_type_title_singular },
-        { "text": "Dates done", "format": "numeric", "classes": "nhsuk-table__section-start"},
+        { "text": "Sessions done", "format": "numeric", "classes": "nhsuk-table__section-start"},
         { "text": "Eligible cohort", "format": "numeric" },
-        { "text": "Consent given", "format": "numeric", "classes": "nhsuk-table__section-start" },
+        { "text": "Consent requested", "format": "numeric", "classes": "nhsuk-table__section-start" },
+        { "text": "Consent given", "format": "numeric" },
         { "text": "Consent refused", "format": "numeric" },
         { "text": "Vaccinated", "format": "numeric", "classes": "nhsuk-table__section-start" },
         { "text": "Uptake", "format": "numeric" }

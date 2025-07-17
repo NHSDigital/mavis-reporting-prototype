@@ -32,19 +32,33 @@ class MeasureFaker:
             round(performance * sessions / 100),
         )
 
-        if not self.organisation_type == "school":
-            measures["schools"] = sessions
-            measures["schools_scheduled"] = round(performance / 100 * 0.92 * sessions)
-            measures["schools_notified"] = round(performance / 100 * 0.9 * sessions)
-            measures["schools_completed"] = round(performance / 100 * 0.8 * sessions)
+        measures["schools"] = sessions
+        measures["schools_scheduled"] = round(performance / 100 * 0.92 * sessions)
+        measures["schools_notified"] = round(performance / 100 * 0.9 * sessions)
+        measures["schools_completed"] = round(performance / 100 * 0.8 * sessions)
 
         measures["consent_offered"] = round(eligible_cohort_size * 0.99)
+
+        measures["consent_offered_percentage"] = round(
+            measures["consent_offered"] / eligible_cohort_size * 100
+        )
+
         consent_given = round(eligible_cohort_size * performance / 100)
         consent_refused = round((eligible_cohort_size - consent_given) / 3)
         measures["consent_given"] = consent_given
+        measures["consent_given_percentage"] = round(
+            consent_given / eligible_cohort_size * 100
+        )
         measures["consent_refused"] = consent_refused
-        measures["no_response"] = (
+        measures["consent_refused_percentage"] = round(
+            consent_refused / eligible_cohort_size * 100
+        )
+
+        measures["no_response"] = round(
             eligible_cohort_size - consent_given - measures["consent_refused"]
+        )
+        measures["no_response_percentage"] = round(
+            measures["no_response"] / eligible_cohort_size * 100
         )
 
         measures["vaccinated"] = round(consent_given * performance / 100)

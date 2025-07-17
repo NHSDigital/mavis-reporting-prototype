@@ -28,10 +28,10 @@
       <div class="nhsuk-grid-column-one-third nhsuk-card-group__item app-card-group__item">
         {{ card({
           "classes": "app-card",
-          "heading": "Schools scheduled",
+          "heading": "Schools with scheduled sessions",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('schools_scheduled') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_scheduled') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
           "attributes": {
             "data-definition": "Number of schools with scheduled session dates"
           }
@@ -44,7 +44,7 @@
           "heading": "Schools with consent sent",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('schools_notified') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_notified') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
           "attributes": {
             "data-definition": "Number of schools where consent requests have been sent out to parents"
           }
@@ -57,7 +57,7 @@
           "heading": "Schools with completed sessions",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('schools_completed') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_completed') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
           "attributes": {
             "data-definition": "Number of schools where at least one vaccination session has been completed"
           }
@@ -135,9 +135,12 @@
           "heading": "Consent requested",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_offered') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('consent_offered_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_offered') | thousands ~ " children"
+            ~ "</span></p>",
           "attributes": {
-            "data-definition": "Number of children whose parents have been asked to consent"
+            "data-definition": "Percentage of children whose parents have been asked for consent to vaccinate"
           }
         }) }}
       </div>
@@ -148,9 +151,12 @@
           "heading": "Consent given",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_given') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('consent_given_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_given') | thousands ~ " children"
+            ~ "</span></p>",
           "attributes": {
-            "data-definition": "Number of children for whom consent has been given"
+            "data-definition": "Percentage of children for whom consent has been given"
           }
         }) }}
       </div>
@@ -161,9 +167,12 @@
           "heading": "Consent refused",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_refused') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('consent_refused_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_refused') | thousands ~ " children"
+            ~ "</span></p>",
           "attributes": {
-            "data-definition": "Number of children for whom consent has been refused"
+            "data-definition": "Percentage of children for whom consent has been refused"
           }
         }) }}
       </div>
@@ -174,9 +183,12 @@
           "heading": "No response",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('no_response') | thousands,
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('no_response_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('no_response') | thousands ~ " children"
+            ~ "</span></p>",
           "attributes": {
-            "data-definition": "Number of children who have not responded to the consent request"
+            "data-definition": "Percentage of children for whom no response has been received to the consent request"
           }
         }) }}
       </div>

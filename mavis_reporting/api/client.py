@@ -1,6 +1,7 @@
 from mavis_reporting.api.data.gender import genders
 from mavis_reporting.api.data.programme import programmes
 from mavis_reporting.api.data.region import midlands
+from mavis_reporting.api.data.measures import measures
 from mavis_reporting.api.data.year_group import year_groups
 from mavis_reporting.helpers.region_data_helper import process_region_data
 from mavis_reporting.models.region import Region
@@ -23,3 +24,6 @@ class MavisAPI:
 
     def year_groups(self) -> list[dict]:
         return year_groups
+
+    def measures(self) -> dict[str, dict]:
+        return measures

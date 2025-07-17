@@ -15,6 +15,15 @@
     "classes": "nhsuk-card app-control-container"
   }) %}
 
+  {% set programme_items = [] %}
+  {% for programme in params.programmes %}
+    {% set _ = programme_items.append({
+      "text": programme["name"],
+      "value": programme["code"],
+      "checked": programme["code"] == "hpv",
+    }) %}
+  {% endfor %}
+
     <div class="app-control">
       {{ radios({
         "idPrefix": "programme",
@@ -25,7 +34,7 @@
             "classes": "nhsuk-fieldset__legend--s"
           }
         },
-        "items": params.programmes
+        "items": programme_items,
       }) }}
     </div>
 

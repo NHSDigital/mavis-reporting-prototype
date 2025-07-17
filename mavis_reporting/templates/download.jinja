@@ -1,0 +1,134 @@
+{% from "components/heading.jinja" import heading %}
+{% from "input/macro.jinja" import input %}
+{% from "select/macro.jinja" import select %}
+{% from "checkboxes/macro.jinja" import checkboxes %}
+{% from "button/macro.jinja" import button %}
+
+{% extends 'layouts/base.jinja' %}
+
+{% block page_content %}
+
+{{ heading({
+  "text": "Download data",
+  "level": 1,
+  "size": "xl",
+}) }}
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
+    <p>You can download a current snapshot of the data in Mavis customised to your needs.</p>
+  </div>
+</div>
+
+<form action="/download" method="post">
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
+    {{ heading({
+      "text": "Choose a provider",
+      "level": 2,
+      "size": "s",
+    }) }}
+
+    {{ select({
+      "label": {
+        "text": "Provider",
+        "classes": "nhsuk-u-visually-hidden",
+      },
+      "id": "provider",
+      "name": "provider",
+      "items": providers,
+    }) }} 
+  </div>
+</div>
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
+    {{ heading({
+      "text": "Choose a programme",
+      "level": 2,
+      "size": "s",
+    }) }}
+
+    {% set programme_items = [] %}
+    {% for programme in programmes %}
+      {% set _ = programme_items.append({
+        "text": programme["name"],
+        "value": programme["code"],
+        "selected": programme["code"] == "hpv",
+      }) %}
+    {% endfor %}
+
+    {{ select({
+      "label": {
+        "text": "Programme",
+        "classes": "nhsuk-u-visually-hidden",
+      },
+      "id": "programme",
+      "name": "programme",
+      "items": programme_items,
+    }) }}
+  </div>
+</div>
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
+    {{ heading({
+      "text": "Choose variables",
+      "level": 2,
+      "size": "s",
+    }) }}
+
+    {{ checkboxes({
+      "id": "variables",
+      "name": "variables",
+      "items": [
+        {
+          "text": "Local authority",
+          "value": "local_authority",
+        },
+        {
+          "text": "School",
+          "value": "school",
+        },
+        {
+          "text": "Year group",
+          "value": "year_group",
+        },
+        {
+          "text": "Ethnicity",
+          "value": "ethnicity",
+        },
+        {
+          "text": "Gender",
+          "value": "gender",
+        }
+      ],
+    }) }}
+  </div>
+</div>
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
+    {{ heading({
+      "text": "Choose measures",
+      "level": 2,
+      "size": "s",
+    }) }}
+
+    {{ checkboxes({
+      "id": "measures",
+      "name": "measures",
+      "items": measures,
+    }) }}
+  </div>
+</div>
+
+{{ button({
+  "text": "Download data",
+  "type": "submit",
+}) }}
+
+</form>
+
+{% endblock %}

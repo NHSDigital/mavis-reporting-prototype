@@ -40,6 +40,10 @@
     .nhsuk-card__link {
       @include nhsuk-link-style-white;
     }
+
+    .nhsuk-card__caption {
+      color: $color_nhsuk-white;
+    }
   }
 
   &-group {

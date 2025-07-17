@@ -1,7 +1,7 @@
 
 
-DOCKER_IMAGE := mavis-reporting:latest
-HOST_PORT := 5000
+DOCKER_IMAGE ?= mavis-reporting:latest
+HOST_PORT ?= 5000
 
 .PHONY: clean
 clean:

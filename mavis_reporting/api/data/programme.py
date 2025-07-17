@@ -1,22 +1,22 @@
 programmes = [
     {
-        "text": "Flu",
+        "name": "Flu",
         "code": "flu",
     },
     {
-        "text": "HPV",
+        "name": "HPV",
         "code": "hpv",
     },
     {
-        "text": "MenACWY",
+        "name": "MenACWY",
         "code": "menacwy",
     },
     {
-        "text": "MMR",
+        "name": "MMR",
         "code": "mmr",
     },
     {
-        "text": "Td/IPV",
+        "name": "Td/IPV",
         "code": "td-ipv",
     },
 ]

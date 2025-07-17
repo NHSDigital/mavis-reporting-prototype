@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g, redirect, url_for, abort
+from flask import Blueprint, render_template, g, redirect, url_for, abort, request
 import logging
 
 from mavis_reporting.api.client import MavisAPI
@@ -15,16 +15,10 @@ def get_region():
     """Get core data from the API and store it in the global g object."""
     api = MavisAPI()
     g.region = api.region()
-    g.programmes = [
-        {
-            "value": programme["code"],
-            "text": programme["text"],
-            "checked": True if programme["code"] == "hpv" else False,
-        }
-        for programme in api.programmes()
-    ]
+    g.programmes = api.programmes()
     g.year_groups = api.year_groups()
     g.genders = api.genders()
+    g.measures = api.measures()
 
 
 @main.context_processor
@@ -140,6 +134,31 @@ def school(code):
 @main.route("/data-definitions")
 def data_definitions():
     return render_template("data_definitions.jinja")
+
+
+@main.route("/download", methods=["GET", "POST"])
+def download():
+    if request.method == "POST":
+        return redirect(url_for("main.download"))
+
+    measures = [
+        {
+            "text": measure["name"],
+            "description": measure["description"],
+            "value": measure["code"],
+            "hint": {
+                "text": measure["description"],
+            },
+        }
+        for measure in g.measures.values()
+    ]
+
+    return render_template(
+        "download.jinja",
+        programmes=g.programmes,
+        providers=g.region.providers,
+        measures=measures,
+    )
 
 
 @main.errorhandler(404)

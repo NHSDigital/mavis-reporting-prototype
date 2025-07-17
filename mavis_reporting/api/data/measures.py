@@ -1,27 +1,32 @@
 measures = {
-    "sessions_completed": {
-        "name": "Sessions completed",
-        "description": "Number of sessions completed",
-        "code": "sessions_completed",
-    },
-    "vaccinations": {
-        "name": "Vaccinations",
-        "description": "Number of vaccinations administered",
-        "code": "vaccinations",
-    },
     "eligible_cohort": {
         "name": "Eligible cohort",
         "description": "Number of children eligible for the vaccine in this programme year",
         "code": "eligible_cohort",
     },
+    "vaccinated": {
+        "name": "Vaccinated",
+        "description": "Number of children who have received the vaccine from a SAIS team in this programme year",
+        "code": "vaccinated",
+    },
+    "vaccinated_elsewhere": {
+        "name": "Vaccinated elsewhere (self-reported)",
+        "description": "Number of children who have received the vaccine elsewhere in this programme year, according to the parents or child",
+        "code": "vaccinated_elsewhere",
+    },
+    "uptake": {
+        "name": "Uptake",
+        "description": "Percentage of children in the eligible cohort who have received the vaccine in this programme year",
+        "code": "uptake",
+    },
     "consent_offered": {
         "name": "Consent offered",
-        "description": "Number of children offered asked to consent",
+        "description": "Number of children whose parents have been asked for consent to vaccinate their child",
         "code": "offered",
     },
     "consent_given": {
         "name": "Consent given",
-        "description": "Number of children who have valid consent to receive the vaccine",
+        "description": "Number of children for whom consent has been given",
         "code": "consent_given",
     },
     "consent_refused": {
@@ -31,17 +36,7 @@ measures = {
     },
     "no_response": {
         "name": "No response",
-        "description": "Number of children for whom no response was received",
+        "description": "Number of children for whom no response has been received to the consent request",
         "code": "no_response",
-    },
-    "outstanding": {
-        "name": "Outstanding",
-        "description": "Number of children with consent who have not yet received the vaccine",
-        "code": "outstanding",
-    },
-    "vaccinated": {
-        "name": "Vaccinated",
-        "description": "Number of children who have received the vaccine",
-        "code": "vaccinated",
     },
 }

@@ -102,7 +102,7 @@
           "heading": "Uptake",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('uptake') | percentage,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('uptake') | percentage ~ "<span class='nhsuk-card__caption'>" ~ "of the eligible cohort</span></p>",
         }) }}
       </div>
     </div>

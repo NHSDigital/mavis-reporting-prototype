@@ -32,9 +32,6 @@
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
           "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_scheduled') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Number of schools with scheduled session dates"
-          }
         }) }}
       </div>
 
@@ -45,9 +42,6 @@
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
           "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_notified') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Number of schools where consent requests have been sent out to parents"
-          }
         }) }}
       </div>
 
@@ -58,9 +52,6 @@
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
           "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_completed') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Number of schools where at least one vaccination session has been completed"
-          }
         }) }}
       </div>
     </div>
@@ -70,6 +61,10 @@
       Vaccinations
     </h2>
 
+    <p class="nhsuk-body-m">
+      All statistics relate to vaccinations given in this programme year.
+    </p>
+
     <div class="nhsuk-card-group nhsuk-grid-row app-card-group">
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
@@ -77,10 +72,7 @@
           "heading": "Eligible cohort",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('eligible_cohort') | thousands,
-          "attributes": {
-            "data-definition": "Number of children eligible for the vaccine in this programme year"
-          }
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('eligible_cohort') | thousands ~ "<span class='nhsuk-card__caption'>children</span></p>",
         }) }}
       </div>
 
@@ -90,23 +82,17 @@
           "heading": "Vaccinated by SAIS",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('vaccinated') | thousands,
-          "attributes": {
-            "data-definition": "Number of children who have received the vaccine in this programme year"
-          }
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('vaccinated_percentage') | percentage ~ "<span class='nhsuk-card__caption'>" ~ organisation.measure_value('vaccinated') | thousands ~ " children</span></p>",
         }) }}
       </div>
 
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
           "classes": "app-card",
-          "heading": "Vaccinated elsewhere",
+          "heading": "Vaccinated elsewhere (self-reported)",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('vaccinated_elsewhere') | thousands,
-          "attributes": {
-            "data-definition": "Number of children who have received the vaccine elsewhere in this programme year, according to the parents or child"
-          }
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('vaccinated_elsewhere_percentage') | percentage ~ "<span class='nhsuk-card__caption'>" ~ organisation.measure_value('vaccinated_elsewhere') | thousands ~ " children</span></p>",
         }) }}
       </div>
 
@@ -117,9 +103,6 @@
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
           "description": organisation.measure_value('uptake') | percentage,
-          "attributes": {
-            "data-definition": "Percentage of the eligible cohort who have received the vaccine in this programme year"
-          }
         }) }}
       </div>
     </div>
@@ -139,9 +122,6 @@
              ~ organisation.measure_value('consent_offered_percentage') | percentage
              ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_offered') | thousands ~ " children"
             ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Percentage of children whose parents have been asked for consent to vaccinate"
-          }
         }) }}
       </div>
 
@@ -155,9 +135,6 @@
              ~ organisation.measure_value('consent_given_percentage') | percentage
              ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_given') | thousands ~ " children"
             ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Percentage of children for whom consent has been given"
-          }
         }) }}
       </div>
 
@@ -171,9 +148,6 @@
              ~ organisation.measure_value('consent_refused_percentage') | percentage
              ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_refused') | thousands ~ " children"
             ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Percentage of children for whom consent has been refused"
-          }
         }) }}
       </div>
 
@@ -187,9 +161,6 @@
              ~ organisation.measure_value('no_response_percentage') | percentage
              ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('no_response') | thousands ~ " children"
             ~ "</span></p>",
-          "attributes": {
-            "data-definition": "Percentage of children for whom no response has been received to the consent request"
-          }
         }) }}
       </div>
     </div>

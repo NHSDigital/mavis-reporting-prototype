@@ -7,6 +7,8 @@ $nhsuk-grid-widths: (
   two-thirds: 66.6666%,
   three-quarters: 75%,
   full: 100%,
+  filters: 20%,
+  data: 80%
 );
 
 @import "nhsuk-frontend/packages/nhsuk.scss";

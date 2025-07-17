@@ -1,0 +1,18 @@
+# Container Variables Configuration
+# This file specifies environment-specific variables that will be added to or override
+# the environment variables extracted from terraform configuration
+
+environments:
+  production:
+
+  qa:
+
+  test:
+
+  preview:
+
+  training:
+
+  sandbox-alpha:
+
+  sandbox-beta:

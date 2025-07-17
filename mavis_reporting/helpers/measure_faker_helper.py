@@ -55,15 +55,21 @@ class MeasureFaker:
         )
 
         measures["no_response"] = round(
-            eligible_cohort_size - consent_given - measures["consent_refused"]
+            measures["consent_offered"] - consent_given - measures["consent_refused"]
         )
         measures["no_response_percentage"] = round(
             measures["no_response"] / eligible_cohort_size * 100
         )
 
         measures["vaccinated"] = round(consent_given * performance / 100)
+        measures["vaccinated_percentage"] = round(
+            measures["vaccinated"] / eligible_cohort_size * 100
+        )
         measures["vaccinated_elsewhere"] = round(
             (measures["vaccinated"] * (1 - performance / 100)) / 2
+        )
+        measures["vaccinated_elsewhere_percentage"] = round(
+            measures["vaccinated_elsewhere"] / eligible_cohort_size * 100
         )
         measures["vaccinations"] = round(measures["vaccinated"] * 1.001)
         measures["uptake"] = round(

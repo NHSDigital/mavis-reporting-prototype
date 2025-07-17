@@ -1,11 +1,11 @@
 genders = [
     {
-        "text": "Male",
-        "value": "male",
-    },
-    {
         "text": "Female",
         "value": "female",
+    },
+    {
+        "text": "Male",
+        "value": "male",
     },
     {
         "text": "Other",

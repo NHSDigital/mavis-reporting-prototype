@@ -1,5 +1,9 @@
 programmes = [
     {
+        "text": "Flu",
+        "code": "flu",
+    },
+    {
         "text": "HPV",
         "code": "hpv",
     },
@@ -8,15 +12,11 @@ programmes = [
         "code": "menacwy",
     },
     {
-        "text": "Td/IPV",
-        "code": "td-ipv",
-    },
-    {
-        "text": "Flu",
-        "code": "flu",
-    },
-    {
         "text": "MMR",
         "code": "mmr",
+    },
+    {
+        "text": "Td/IPV",
+        "code": "td-ipv",
     },
 ]

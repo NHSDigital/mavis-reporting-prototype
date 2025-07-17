@@ -1,0 +1,46 @@
+@use "sass:color";
+
+.app-card {
+  display: flex;
+
+  .nhsuk-card__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: nhsuk-spacing(4);
+  }
+
+  .nhsuk-card__heading {
+    @include nhsuk-typography-weight-normal;
+  }
+
+  .nhsuk-card__description {
+    margin-top: auto;
+    @include nhsuk-typography-responsive(36);
+    @include nhsuk-typography-weight-bold;
+  }
+
+  &--reversed {
+    background-color: $color_nhsuk-blue;
+    border-color: nhsuk-shade($nhsuk-link-color, 25%);
+    color: $color_nhsuk-white;
+
+    &:active {
+      border-color: nhsuk-shade($nhsuk-link-color, 50%);
+    }
+
+    .nhsuk-card__link {
+      @include nhsuk-link-style-white;
+    }
+  }
+
+  &-group {
+    margin-left: -(nhsuk-spacing(2));
+    margin-right: -(nhsuk-spacing(2));
+
+    &__item {
+      padding-left: nhsuk-spacing(2);
+      padding-right: nhsuk-spacing(2);
+    }
+  }
+}

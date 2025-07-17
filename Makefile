@@ -10,6 +10,10 @@ sentinel: package.json package-lock.json pyproject.toml poetry.lock
 	@npm install || (echo "Failed to install npm dependencies"; exit 1)
 	@poetry config virtualenvs.in-project true
 	@poetry install || (echo "Failed to install Python dependencies"; exit 1)
+	
+	@echo "== Copying NHSUK favicons =="
+	@make copy-nhsuk-favicons
+	
 	@touch sentinel
 
 .PHONY: install
@@ -21,7 +25,7 @@ lint: install
 
 .PHONY: dev
 dev: install
-	@echo "Starting development servers ..."
+	@echo "== Starting development servers =="
 	@echo "Press Ctrl+C to stop all processes"
 	@poetry run honcho start -f Procfile.dev
 
@@ -32,3 +36,8 @@ test:
 .PHONY: test-coverage
 test-coverage:
 	@true
+
+.PHONY: copy-nhsuk-favicons
+copy-nhsuk-favicons:
+	mkdir -p mavis_reporting/static/favicons
+	cp -r node_modules/nhsuk-frontend/packages/assets/favicons/* mavis_reporting/static/favicons/

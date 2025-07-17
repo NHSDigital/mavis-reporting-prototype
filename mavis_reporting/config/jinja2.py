@@ -2,6 +2,7 @@ import os
 
 from jinja2 import FileSystemLoader, ChoiceLoader, PackageLoader, ChainableUndefined
 from mavis_reporting.helpers.static_file_helper import static
+from mavis_reporting.helpers.number_helper import thousands, percentage
 
 
 def configure_jinja2(app):
@@ -21,5 +22,9 @@ def configure_jinja2(app):
 
     # Add the static function to allow for cache busting of static files
     app.jinja_env.globals["static"] = static
+
+    # Add custom filters
+    app.jinja_env.filters["thousands"] = thousands
+    app.jinja_env.filters["percentage"] = percentage
 
     return app

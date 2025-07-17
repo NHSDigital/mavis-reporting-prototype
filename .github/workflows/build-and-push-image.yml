@@ -70,6 +70,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.git-sha || github.sha }}
+      - name: Make sure public dir is present
+        run: mkdir -p public
       - name: Write build SHA
         run: git rev-parse HEAD > public/sha
       - name: Build Docker image

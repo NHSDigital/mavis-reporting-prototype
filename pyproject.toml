@@ -19,7 +19,7 @@ boto3 = "==1.39.0"
 pyyaml = "^6.0.2"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "==0.12.3"
+ruff = "==0.12.4"
 honcho = "^2.0.0"
 
 [build-system]

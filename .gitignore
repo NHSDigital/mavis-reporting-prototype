@@ -12,7 +12,7 @@
 __pycache__/
 .ruff_cache/
 node_modules/
-
+.idea/
 mavis_reporting/static/css/*
 !mavis_reporting/static/css/.keep
 

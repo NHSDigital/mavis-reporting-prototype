@@ -40,3 +40,49 @@ A Flask-based web application prototype for the commissioner reporting component
    ```
 
    The application will be available at `http://localhost:5000`.
+
+## Building & Running a Docker container
+
+The application can be built and run via Docker, to support deployment.
+
+**Build**
+
+`make build-docker`
+
+This will build a container image tagged with `mavis/reporting:latest`, which will listen on port 5000. To use a different tag, supply the `DOCKER_IMAGE` environment variable (e.g. `DOCKER_IMAGE=reporting-component:spike-11 make build-docker`)
+
+Note that it will not push the image to any repository - you must do that manually if you want to.
+
+**Run**
+
+`make run-docker`
+
+This will run the container image tagged with `mavis/reporting:latest` and listen on the host port 5000. 
+To use a different tag, supply the `DOCKER_IMAGE` environment variable .
+To map a different host port (for instance if you have something else running on port 5000) supply the `HOST_PORT` environment variable 
+
+Example:
+
+`DOCKER_IMAGE=reporting-component:spike-11 HOST_PORT=5001 make run-docker` will run the container image tagged with `reporting-component:spike-11` and map port 5001 on the host to port 5000 on the container.
+
+You could then access the running app with http://localhost:5001 on your browser.
+
+
+**Gunicorn arguments**
+
+Additional parameters to the `gunicorn` executable (for instance, the number of workers) can be passed through with the `GUNICORN_CMD_ARGS` environment variable. 
+
+Example:
+
+```
+% HOST_PORT=5555 GUNICORN_CMD_ARGS="--workers=5" make run-docker
+docker run --rm -p 5555:5000 -e GUNICORN_CMD_ARGS=--workers=5 mavis-reporting:latest
+[2025-07-17 10:32:01 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2025-07-17 10:32:01 +0000] [1] [INFO] Listening at: http://0.0.0.0:5000 (1)
+[2025-07-17 10:32:01 +0000] [1] [INFO] Using worker: sync
+[2025-07-17 10:32:01 +0000] [10] [INFO] Booting worker with pid: 10
+[2025-07-17 10:32:01 +0000] [11] [INFO] Booting worker with pid: 11
+[2025-07-17 10:32:01 +0000] [12] [INFO] Booting worker with pid: 12
+[2025-07-17 10:32:01 +0000] [13] [INFO] Booting worker with pid: 13
+[2025-07-17 10:32:01 +0000] [14] [INFO] Booting worker with pid: 14
+```

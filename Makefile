@@ -1,3 +1,8 @@
+
+
+DOCKER_IMAGE ?= mavis-reporting:latest
+HOST_PORT ?= 5000
+
 .PHONY: clean
 clean:
 	@rm -f sentinel
@@ -41,3 +46,10 @@ test-coverage:
 copy-nhsuk-favicons:
 	mkdir -p mavis_reporting/static/favicons
 	cp -r node_modules/nhsuk-frontend/packages/assets/favicons/* mavis_reporting/static/favicons/
+
+build-docker:
+	docker build -t ${DOCKER_IMAGE} .
+
+.PHONY: run-docker
+run-docker:
+	docker run --rm -p ${HOST_PORT}:5000 -e GUNICORN_CMD_ARGS=${GUNICORN_CMD_ARGS} ${DOCKER_IMAGE}

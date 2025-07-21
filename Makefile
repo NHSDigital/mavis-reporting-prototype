@@ -39,5 +39,4 @@ test-coverage:
 
 .PHONY: copy-nhsuk-favicons
 copy-nhsuk-favicons:
-	mkdir -p mavis_reporting/static/favicons
 	cp -r node_modules/nhsuk-frontend/packages/assets/favicons/* mavis_reporting/static/favicons/

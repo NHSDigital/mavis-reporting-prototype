@@ -34,6 +34,7 @@ def inject_mavis_data():
         "programmes": g.programmes,
         "year_groups": g.year_groups,
         "genders": g.genders,
+        "site_title": "Manage vaccinations in schools",
     }
 
 
@@ -134,6 +135,11 @@ def school(code):
             "school", code, "school"
         ),
     )
+
+
+@main.route("/data-definitions")
+def data_definitions():
+    return render_template("data_definitions.jinja")
 
 
 @main.errorhandler(404)

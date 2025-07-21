@@ -1,0 +1,9 @@
+.app-definition-list {
+  &__term {
+    font-weight: bold;
+  }
+
+  &__definition {
+    margin: 0 0 nhsuk-spacing(4);
+  }
+}

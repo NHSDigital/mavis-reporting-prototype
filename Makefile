@@ -28,6 +28,10 @@ install: sentinel
 lint: install
 	poetry run ruff check .
 
+.PHONY: lint-fix
+lint-fix: install
+	poetry run ruff check --fix .
+
 .PHONY: dev
 dev: install
 	@echo "== Starting development servers =="

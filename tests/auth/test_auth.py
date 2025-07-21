@@ -5,7 +5,6 @@ from unittest import mock
 import urllib.parse
 
 
-
 def it_redirects_to_mavis_start(response):
     # Check that the response had a redirect code.
     assert response.status_code == 302
@@ -14,7 +13,7 @@ def it_redirects_to_mavis_start(response):
     assert "/start" in redirect_to
     # Check that the return_url param is on the redirect
     parsed_url = urllib.parse.urlparse(redirect_to)
-    assert "redirect_after_login=" in parsed_url.query
+    assert "redirect_uri=" in parsed_url.query
     return True
 
 

@@ -7,12 +7,17 @@ load_dotenv()
 class Config:
     """Base configuration"""
 
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    # used for verifying signature of Mavis-issued JWTs
+    CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+    # used to identify this app in the OAuth Authorization Code request
+    CLIENT_ID = os.environ.get("CLIENT_ID")
     # Used as the base for constructing URLs to
-    # exchange auth tokens, and request data
+    # exchange auth codes, and request data
     MAVIS_ROOT_URL = os.environ.get("MAVIS_ROOT_URL") or "http://localhost:4000/"
 
     # Flask config
+    # Flask-internal secret
+    SECRET_KEY = os.environ.get("SECRET_KEY")
     TEMPLATES_AUTO_RELOAD = True
     SESSION_TTL_SECONDS = int(os.environ.get("SESSION_TTL_SECONDS") or "600")
 

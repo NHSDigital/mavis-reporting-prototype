@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-import urllib
+import jwt, urllib
 
 from flask import (
     request,
@@ -24,18 +24,16 @@ def login_required(f):
 
         elif not is_logged_in(session, current_app):
             current_app.logger.info("NOT logged in")
-            token = request.args.get("token")
-            if token:
-                user_data = mavis_helper.verify_token(token, current_app, session)
+            auth_code = request.args.get("code")
+            if auth_code:
+                user_data = mavis_helper.verify_auth_code(auth_code, current_app)
                 log_user_in(user_data, session)
-                return redirect(
-                    url_helper.url_without_param(request.full_path, "token")
-                )
+                return redirect(url_helper.url_without_param(request.full_path, "code"))
             else:
-                current_app.logger.info("no token given")
+                current_app.logger.info("no code given")
                 target_url = mavis_helper.mavis_url(
                     current_app,
-                    "/start?redirect_after_login=" + urllib.parse.quote(request.url),
+                    "/start?redirect_uri=" + urllib.parse.quote(request.url),
                 )
                 return redirect(target_url)
 
@@ -44,7 +42,7 @@ def login_required(f):
     return decorated_function
 
 
-def session_expired(session, current_app):
+def session_expired(session, current_app=current_app):
     last_visit = session.get("last_visit")
     if last_visit is None:
         return True
@@ -53,7 +51,7 @@ def session_expired(session, current_app):
     return abs(session_age) > current_app.config["SESSION_TTL_SECONDS"]
 
 
-def is_logged_in(session, current_app):
+def is_logged_in(session, current_app=current_app):
     if "user_id" in session:
         if session_expired(session, current_app):
             session.clear()
@@ -66,11 +64,37 @@ def is_logged_in(session, current_app):
         return False
 
 
-def log_user_in(data, session):
+def decode_jwt(encoded_jwt, current_app=current_app):
+    secret = current_app.config["CLIENT_SECRET"]
+    return jwt.decode(encoded_jwt, secret, algorithms="HS512")
+
+
+def encode_jwt(payload, current_app=current_app):
+    secret = current_app.config["CLIENT_SECRET"]
+    return jwt.encode(payload, secret, algorithm="HS512")
+
+
+def log_user_in(data, session=session):
     session["last_visit"] = datetime.now().astimezone(timezone.utc)
     session["cis2_info"] = data["cis2_info"]
     session["user"] = data["user"]
     session["user_id"] = data["user"]["id"]
+    session["jwt"] = minimal_jwt(data)
+
+
+def minimal_jwt(data):
+    payload = {
+        "data": {
+            "user": {
+                "id": data["user"]["id"],
+                "reporting_app_session_token": data["user"][
+                    "reporting_app_session_token"
+                ],
+            },
+            "cis2_info": data["cis2_info"],
+        }
+    }
+    return encode_jwt(payload)
 
 
 def fake_login_enabled(current_app):
@@ -92,6 +116,7 @@ def fake_user_session_info():
             "given_name": "Nurse",
             "family_name": "Joy",
             "session_token": None,
+            "reporting_app_session_token": None,
             "fallback_role": "nurse",
         },
         "cis2_info": {

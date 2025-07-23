@@ -20,3 +20,8 @@ $nhsuk-grid-widths: (
 @import "components/secondary_navigation";
 @import "components/data_table";
 @import "components/app_definition_list";
+
+.nhsuk-card--button {
+  cursor: pointer;
+  text-align: left;
+}

@@ -6,6 +6,8 @@
 
 {% extends 'layouts/base.jinja' %}
 
+{% block pageTitle %}Download data | {{ site_title }}{% endblock %}
+
 {% block page_content %}
 
 {{ heading({
@@ -16,12 +18,13 @@
 
 <div class="nhsuk-grid-row">
   <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
-    <p>You can download a current snapshot of the data in Mavis customised to your needs.</p>
+    <p>Select the variables and measures you need and download a current snapshot of the data in Mavis.</p>
   </div>
 </div>
 
 <form action="/download" method="post">
 
+{% if session["user"] == "region" %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
     {{ heading({
@@ -41,6 +44,7 @@
     }) }} 
   </div>
 </div>
+{% endif %}
 
 <div class="nhsuk-grid-row">
   <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">

@@ -1,0 +1,40 @@
+{% from "components/heading.jinja" import heading %}
+{% from "input/macro.jinja" import input %}
+{% from "select/macro.jinja" import select %}
+{% from "checkboxes/macro.jinja" import checkboxes %}
+{% from "button/macro.jinja" import button %}
+{% from "card/macro.jinja" import card %}
+
+{% extends 'layouts/base.jinja' %}
+
+{% block page_content %}
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-u-margin-bottom-3 nhsuk-grid-column-two-thirds">
+
+    {{ heading({
+      "text": "Select a role",
+      "level": 1,
+      "size": "xl",
+    }) }}
+
+    <form action="/login" method="post">
+      <button type="submit" name="role" value="region" class="nhsuk-card nhsuk-card--button nhsuk-card--clickable">
+        <div class="nhsuk-card__content">
+          <h2 class="nhsuk-heading-m nhsuk-card__heading">{{ region.name }}</h2>
+          <p class="nhsuk-body-m nhsuk-card__description">Region</p>
+        </div>
+      </button>
+
+      <button type="submit" name="role" value="provider" class="nhsuk-card nhsuk-card--button nhsuk-card--clickable">
+        <div class="nhsuk-card__content">
+          <h2 class="nhsuk-heading-m nhsuk-card__heading">{{ region.providers[0].name }}</h2>
+          <p class="nhsuk-body-m nhsuk-card__description">Provider</p>
+        </div>
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

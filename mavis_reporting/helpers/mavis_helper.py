@@ -1,4 +1,3 @@
-import jwt
 import requests
 import urllib.parse
 import werkzeug

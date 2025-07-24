@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
-import jwt, urllib
+import jwt
+import urllib
 
 from flask import (
     request,

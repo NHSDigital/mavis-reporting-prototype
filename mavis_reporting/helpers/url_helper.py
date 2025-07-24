@@ -18,3 +18,9 @@ def url_without_param(url, param):
         return urlunparse(parsed_url)
     else:
         return url
+
+
+def prepend_path(url, prefix):
+    parsed_url = urlparse(url)
+    prefixed_url = parsed_url._replace(path=(prefix + parsed_url.path))
+    return urlunparse(prefixed_url)

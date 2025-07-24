@@ -25,7 +25,7 @@ def test_when_session_has_a_user_id_and_is_not_expired_it_does_not_redirect(clie
             minutes=1
         )
 
-    response = client.get("/")
+    response = client.get("/reporting/")
     assert response.status_code == 200
 
 
@@ -37,7 +37,7 @@ def test_when_session_has_a_user_id_but_is_expired_it_redirects_to_mavis_start(c
             hours=101
         )
 
-    response = client.get("/")
+    response = client.get("/reporting/")
     assert it_redirects_to_mavis_start(response)
 
 
@@ -46,7 +46,7 @@ def test_when_user_id_not_in_session_it_redirects_to_mavis_sign_in(client):
         # set user_id session var without going through the login route
         session.pop("user_id", None)
 
-    response = client.get("/", follow_redirects=False)
+    response = client.get("/reporting/", follow_redirects=False)
     assert it_redirects_to_mavis_start(response)
 
 
@@ -56,7 +56,7 @@ def test_when_user_id_not_in_session_it_redirects_to_mavis_sign_in(client):
 )
 def test_when_fake_login_is_enabled_it_logs_in_as_nurse_joy_without_a_redirect(client):
     with client:
-        response = client.get("/")
+        response = client.get("/reporting/")
         assert response.status_code == 200
         assert session["user_id"] == 1
         assert session["user_id"] == 1

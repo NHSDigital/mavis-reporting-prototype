@@ -1,5 +1,6 @@
 from flask import (
     Blueprint,
+    redirect,
     render_template,
     request,
     session,
@@ -21,6 +22,7 @@ from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_
 
 from mavis_reporting.helpers import mavis_helper
 from mavis_reporting.helpers import auth_helper
+from mavis_reporting.helpers import url_helper
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +30,11 @@ main = Blueprint("main", __name__)
 
 
 @main.route("/")
+def root():
+    return redirect(url_helper.prepend_path(request.full_path, "/reporting"))
+
+
+@main.route("/reporting/")
 @auth_helper.login_required
 def index():
     return redirect(url_for("main.region", code=g.region.code))
@@ -138,12 +145,12 @@ def healthcheck():
     return render_template("index.jinja")
 
 
-@main.route("/api-call")
+@main.route("/reporting/api-call/")
 @auth_helper.login_required
 def api_call():
     response = None
     try:
-        response = mavis_helper.api_call(current_app, session, "/reporting/totals")
+        response = mavis_helper.api_call(current_app, session, "/reporting-api/totals")
     except Unauthorized:
         return mavis_helper.login_and_return_after(current_app, request.url)
 

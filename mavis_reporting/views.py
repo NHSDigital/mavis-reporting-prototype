@@ -22,22 +22,50 @@ from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_
 
 from mavis_reporting.helpers import mavis_helper
 from mavis_reporting.helpers import auth_helper
-from mavis_reporting.helpers import url_helper
 
 logger = logging.getLogger(__name__)
 
 main = Blueprint("main", __name__)
 
 
+@main.before_request
+def get_region():
+    """Get core data from the API and store it in the global g object."""
+    api = MavisAPI()
+    g.region = api.region()
+    logger.warning(api.programmes())
+    g.programmes = [
+        {
+            "value": programme["code"],
+            "text": programme["text"],
+            "checked": True if programme["code"] == "hpv" else False,
+        }
+        for programme in api.programmes()
+    ]
+    g.year_groups = api.year_groups()
+    g.genders = api.genders()
+
+
+@main.context_processor
+def inject_mavis_data():
+    """Inject Mavis variables used to filter data into the template context."""
+    return {
+        "programmes": g.programmes,
+        "year_groups": g.year_groups,
+        "genders": g.genders,
+    }
+
+
 @main.route("/")
-def root():
-    return redirect(url_helper.prepend_path(request.full_path, "/reporting"))
-
-
-@main.route("/reporting/")
 @auth_helper.login_required
 def index():
     return redirect(url_for("main.region", code=g.region.code))
+
+
+@main.route("/default")
+@auth_helper.login_required
+def default():
+    return render_template("default.jinja")
 
 
 @main.route("/region/<code>")
@@ -145,7 +173,7 @@ def healthcheck():
     return render_template("index.jinja")
 
 
-@main.route("/reporting/api-call/")
+@main.route("/api-call/")
 @auth_helper.login_required
 def api_call():
     response = None

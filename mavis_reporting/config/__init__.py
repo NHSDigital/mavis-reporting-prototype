@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def str2bool(v):
+    return v is not None and v.lower() in ("yes", "true", "t", "1")
+
+
 class Config:
     """Base configuration"""
 
@@ -24,7 +28,7 @@ class Config:
     # If this is set to True, you will always have a session as user_id 1,
     # nurse.joy@example.com, org: R1L, role: S8000:G8000:R8001
     # (the default user from db/seeds.rb on the main mavis app)
-    FAKE_LOGIN_ENABLED = bool(os.environ.get("FAKE_LOGIN_ENABLED"))
+    FAKE_LOGIN_ENABLED = str2bool(os.environ.get("FAKE_LOGIN_ENABLED"))
 
 
 class DevelopmentConfig(Config):

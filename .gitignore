@@ -23,3 +23,7 @@ mavis_reporting/static/favicons/*
 !mavis_reporting/static/favicons/.keep
 
 sentinel
+
+.coverage
+htmlcov
+coverage.svg

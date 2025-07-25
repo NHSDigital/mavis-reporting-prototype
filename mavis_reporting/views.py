@@ -1,11 +1,27 @@
-from flask import Blueprint, render_template, g, redirect, url_for, abort
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    session,
+    current_app,
+    url_for,
+    g,
+    abort,
+)
+
 from healthcheck import HealthCheck
+
+from werkzeug.exceptions import Unauthorized
 
 import logging
 
 from mavis_reporting.api.client import MavisAPI
 from mavis_reporting.helpers.breacrumb_helper import generate_breadcrumb_items
 from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_items
+
+from mavis_reporting.helpers import mavis_helper
+from mavis_reporting.helpers import auth_helper
 
 logger = logging.getLogger(__name__)
 
@@ -41,8 +57,15 @@ def inject_mavis_data():
 
 
 @main.route("/")
+@auth_helper.login_required
 def index():
     return redirect(url_for("main.region", code=g.region.code))
+
+
+@main.route("/default")
+@auth_helper.login_required
+def default():
+    return render_template("default.jinja")
 
 
 @main.route("/region/<code>")
@@ -147,3 +170,16 @@ def page_not_found(e):
 @main.route("/healthcheck")
 def healthcheck():
     return HealthCheck().run()
+
+
+@main.route("/api-call/")
+@auth_helper.login_required
+def api_call():
+    response = None
+    try:
+        response = mavis_helper.api_call(current_app, session, "/reporting-api/totals")
+    except Unauthorized:
+        return mavis_helper.login_and_return_after(current_app, request.url)
+
+    data = response.json()
+    return render_template("api_call.jinja", response=response, data=data)

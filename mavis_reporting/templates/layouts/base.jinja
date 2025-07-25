@@ -1,3 +1,4 @@
+
 {% from 'header/macro.jinja' import header %}
 {% extends 'template.jinja' %}
 
@@ -14,8 +15,20 @@
   "showNav": "true",
   "primaryLinks": [
       {
-        "url": "/",
+        "url": config["MAVIS_ROOT_URL"],
+        "label": "Home",
+      },
+      {
+        "url": config["MAVIS_ROOT_URL"] + 'dashboard',
         "label": "Dashboard",
+      },
+      {
+        "url": "/reporting/",
+        "label": "Reporting",
+      },
+      {
+        "url": "/reporting/api-call/",
+        "label": "Test API call"
       }
     ]
 }) }}
@@ -24,6 +37,19 @@
 {% block content %}
 
 {% block page_content %}
+{% endblock %}
+
+
+{% block session %}
+  <details>
+    <summary>session</summary>
+      <dl>
+      {% for key in session %}
+        <dt>{{ key }}</dt>
+          <dd>{{ session.get(key) }}</dd>
+      {% endfor %}
+      </dl>
+    </details>
 {% endblock %}
 
 {% endblock %}

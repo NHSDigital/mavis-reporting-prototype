@@ -17,10 +17,15 @@ gunicorn = "^23.0.0"
 py-healthcheck = "^1.10.1"
 boto3 = "==1.39.13"
 pyyaml = "^6.0.2"
+requests = "^2.32.4"
+pyjwt = "^2.10.1"
+coverage = "^7.9.2"
+coverage-badge = "^1.1.2"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "==0.12.5"
 honcho = "^2.0.0"
+pytest = "^8.4.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

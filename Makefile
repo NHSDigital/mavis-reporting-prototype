@@ -28,15 +28,15 @@ install: sentinel
 lint: install
 	poetry run ruff check .
 
+.PHONY: lint-fix
+lint-fix: install
+	poetry run ruff check --fix .
+
 .PHONY: dev
 dev: install
 	@echo "== Starting development servers =="
 	@echo "Press Ctrl+C to stop all processes"
 	@poetry run honcho start -f Procfile.dev
-
-.PHONY: test
-test:
-	@true
 
 .PHONY: test-coverage
 test-coverage:
@@ -53,3 +53,17 @@ build-docker:
 .PHONY: run-docker
 run-docker:
 	docker run --rm -p ${HOST_PORT}:5000 -e GUNICORN_CMD_ARGS=${GUNICORN_CMD_ARGS} ${DOCKER_IMAGE}
+
+test: install
+	@echo "Running all tests .."
+	@poetry run pytest tests --verbose 
+
+.PHONY: test-coverage
+test-coverage: install
+	@echo "Checking coverage on all tests .."
+	@poetry run coverage run -m  pytest tests --verbose 
+	@poetry run coverage report --fail-under=${FAIL_IF_UNDER}
+	@poetry run coverage html
+	@poetry run coverage xml coverage.xml
+	@poetry run coverage-badge -o coverage.svg
+	

@@ -6,8 +6,9 @@ from mavis_reporting.models.school import School
 def process_region_data(data: dict) -> Region:
     """
     Process the region data from the API data file and convert it into model instances
-    with proper relationships where a region has many providers and a provider has many schools.
-    Also establishes back-references from schools to their parent provider and from providers to their parent region.
+    with proper relationships where a region has many providers and a provider has many
+    schools. Also establishes back-references from schools to their parent provider and
+    from providers to their parent region.
 
     Returns:
         Region: A Region instance with its associated providers and schools

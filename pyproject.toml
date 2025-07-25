@@ -22,7 +22,7 @@ pyjwt = "^2.10.1"
 coverage = "^7.9.2"
 coverage-badge = "^1.1.2"
 
-[tool.ruff]
+[tool.ruff.lint]
 select = ["ARG", "PL", "E", "W", "F"]
 
 [tool.poetry.group.dev.dependencies]

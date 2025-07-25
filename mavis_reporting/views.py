@@ -163,7 +163,7 @@ def school(code):
 
 
 @main.errorhandler(404)
-def page_not_found(e):
+def page_not_found():
     return render_template("errors/404.html"), 404
 
 

@@ -38,10 +38,6 @@ dev: install
 	@echo "Press Ctrl+C to stop all processes"
 	@poetry run honcho start -f Procfile.dev
 
-.PHONY: test-coverage
-test-coverage:
-	@true
-
 .PHONY: copy-nhsuk-favicons
 copy-nhsuk-favicons:
 	mkdir -p mavis_reporting/static/favicons

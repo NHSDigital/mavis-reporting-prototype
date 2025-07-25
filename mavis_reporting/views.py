@@ -170,7 +170,6 @@ def page_not_found(e):
 @main.route("/healthcheck")
 def healthcheck():
     return HealthCheck().run()
-    return render_template("index.jinja")
 
 
 @main.route("/api-call/")

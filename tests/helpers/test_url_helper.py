@@ -1,42 +1,6 @@
 from mavis_reporting.helpers import url_helper
 
 
-def example_dict():
-    return {
-        "key1": "value 1",
-        "key2": "value 2",
-        "complex_key": {"complex_key_sub_1": "aaa", "complex_key_sub_2": "bbb"},
-    }
-
-
-def test_dict_without_keys_with_a_single_simple_key_removes_the_correct_key(app):
-    assert url_helper.dict_without_keys(example_dict(), "key2") == {
-        "key1": "value 1",
-        "complex_key": {"complex_key_sub_1": "aaa", "complex_key_sub_2": "bbb"},
-    }
-
-
-def test_dict_without_keys_with_multiple_simple_keys_removes_the_correct_keys(app):
-    assert url_helper.dict_without_keys(example_dict(), ["key1", "key2"]) == {
-        "complex_key": {"complex_key_sub_1": "aaa", "complex_key_sub_2": "bbb"},
-    }
-
-
-def test_dict_without_keys_with_a_single_complex_key_removes_the_correct_key(app):
-    assert url_helper.dict_without_keys(example_dict(), "complex_key") == {
-        "key1": "value 1",
-        "key2": "value 2",
-    }
-
-
-def test_dict_without_keys_with_a_mix_of_simple_and_complex_keys_removes_the_correct_keys(
-    app,
-):
-    assert url_helper.dict_without_keys(example_dict(), ["key1", "complex_key"]) == {
-        "key2": "value 2"
-    }
-
-
 def test_url_without_param_with_a_single_param_removes_the_param(app):
     assert (
         url_helper.url_without_param(

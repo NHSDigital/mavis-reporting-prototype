@@ -1,10 +1,6 @@
 from urllib.parse import urlparse, parse_qs, parse_qsl, urlencode, urlunparse
 
 
-def dict_without_keys(d, keys):
-    return {x: d[x] for x in d if x not in keys}
-
-
 def url_without_param(url, param):
     parsed_url = urlparse(url)
     query_params_as_dict = parse_qs(parsed_url.query)
@@ -18,9 +14,3 @@ def url_without_param(url, param):
         return urlunparse(parsed_url)
     else:
         return url
-
-
-def prepend_path(url, prefix):
-    parsed_url = urlparse(url)
-    prefixed_url = parsed_url._replace(path=(prefix + parsed_url.path))
-    return urlunparse(prefixed_url)

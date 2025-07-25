@@ -39,13 +39,13 @@ A Flask-based web application prototype for the commissioner reporting component
    make dev
    ```
 
-   The application will be available at `http://localhost:5000`.
+   The application will be available at <http://localhost:5000>.
 
 ## Building & Running a Docker container
 
 The application can be built and run via Docker, to support deployment.
 
-**Build**
+### Build
 
 `make build-docker`
 
@@ -53,28 +53,27 @@ This will build a container image tagged with `mavis/reporting:latest`, which wi
 
 Note that it will not push the image to any repository - you must do that manually if you want to.
 
-**Run**
+### Run
 
 `make run-docker`
 
-This will run the container image tagged with `mavis/reporting:latest` and listen on the host port 5000. 
+This will run the container image tagged with `mavis/reporting:latest` and listen on the host port 5000.
 To use a different tag, supply the `DOCKER_IMAGE` environment variable .
-To map a different host port (for instance if you have something else running on port 5000) supply the `HOST_PORT` environment variable 
+To map a different host port (for instance if you have something else running on port 5000) supply the `HOST_PORT` environment variable
 
 Example:
 
 `DOCKER_IMAGE=reporting-component:spike-11 HOST_PORT=5001 make run-docker` will run the container image tagged with `reporting-component:spike-11` and map port 5001 on the host to port 5000 on the container.
 
-You could then access the running app with http://localhost:5001 on your browser.
+You could then access the running app with <http://localhost:5001> on your browser.
 
+### Gunicorn arguments
 
-**Gunicorn arguments**
-
-Additional parameters to the `gunicorn` executable (for instance, the number of workers) can be passed through with the `GUNICORN_CMD_ARGS` environment variable. 
+Additional parameters to the `gunicorn` executable (for instance, the number of workers) can be passed through with the `GUNICORN_CMD_ARGS` environment variable.
 
 Example:
 
-```
+```bash
 % HOST_PORT=5555 GUNICORN_CMD_ARGS="--workers=5" make run-docker
 docker run --rm -p 5555:5000 -e GUNICORN_CMD_ARGS=--workers=5 mavis-reporting:latest
 [2025-07-17 10:32:01 +0000] [1] [INFO] Starting gunicorn 23.0.0
@@ -86,15 +85,16 @@ docker run --rm -p 5555:5000 -e GUNICORN_CMD_ARGS=--workers=5 mavis-reporting:la
 [2025-07-17 10:32:01 +0000] [13] [INFO] Booting worker with pid: 13
 [2025-07-17 10:32:01 +0000] [14] [INFO] Booting worker with pid: 14
 ```
+
 ## Runtime dependencies
 
-This application authenticates with the main Mavis application using the [OAuth 2.0 Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1). 
+This application authenticates with the main Mavis application using the [OAuth 2.0 Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1).
 
 To do this, it requires:
 
 1. A copy of the main Mavis app must be running and available at the URL given in the `MAVIS_ROOT_URL` env var
 2. That copy of Mavis must:
-   * include [this corresponding PR](https://github.com/nhsuk/manage-vaccinations-in-schools/pull/3866/)
-   * have the `reporting_app` feature flag enabled
-   * have a value for `Settings.mavis_reporting_app.client_id` (..which can also be set via the `MAVIS_REPORTING_APP__CLIENT_ID` environment variable) which matches this applications' `CLIENT_ID` value
-   * have a value for `Settings.mavis_reporting_app.client_secret` (..which can also be set via the `MAVIS_REPORTING_APP__CLIENT_SECRET` environment variable) which matches this applications' `CLIENT_SECRET` value
+   - include [this corresponding PR](https://github.com/nhsuk/manage-vaccinations-in-schools/pull/3866/)
+   - have the `reporting_app` feature flag enabled
+   - have a value for `Settings.mavis_reporting_app.client_id` (..which can also be set via the `MAVIS_REPORTING_APP__CLIENT_ID` environment variable) which matches this application's `CLIENT_ID` value
+   - have a value for `Settings.mavis_reporting_app.client_secret` (..which can also be set via the `MAVIS_REPORTING_APP__CLIENT_SECRET` environment variable) which matches this application's `CLIENT_SECRET` value

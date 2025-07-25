@@ -14,6 +14,7 @@ def create_app(config_name=None):
 
     configure_jinja2(app)
 
+    # ruff: noqa: PLC0415
     from mavis_reporting.views import main
 
     app.register_blueprint(main, url_prefix="/reporting")

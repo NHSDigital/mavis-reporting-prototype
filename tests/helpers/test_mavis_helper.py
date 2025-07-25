@@ -1,4 +1,5 @@
 import json
+from http import HTTPStatus
 import pytest
 import werkzeug
 
@@ -62,7 +63,7 @@ class MockResponse:
         return self.json_obj or json.loads(self.text)
 
 
-def test_that_verify_auth_code_calls_the_correct_mavis_url_with_client_id_and_code_in_the_body(
+def test_that_verify_auth_code_is_called_correctly(
     app,
 ):
     with app.app_context():
@@ -94,7 +95,7 @@ def test_that_verify_auth_code_calls_the_correct_mavis_url_with_client_id_and_co
                 )
 
 
-def test_that_api_call_calls_the_correct_mavis_url_with_the_jwt_in_the_authorization_header(
+def test_that_api_call_is_called_correctly(
     app,
 ):
     mock_session = {"jwt": "myjwt"}
@@ -129,10 +130,10 @@ def test_that_api_call_calls_the_correct_mavis_url_with_the_jwt_in_the_authoriza
             )
 
 
-def test_that_when_an_api_call_returns_401_or_403_it_raises_an_exception_and_clears_the_current_session(
+def test_that_an_unauthorized_api_call_raises_an_exception_and_clears_the_session(
     app,
 ):
-    for code in [401, 403]:
+    for code in [HTTPStatus.UNAUTHORIZED, HTTPStatus.FORBIDDEN]:
         mock_session = {"jwt": "myjwt"}
         with app.app_context():
             app.config["MAVIS_ROOT_URL"] = "http://i.am.mavis:4000/"
@@ -156,18 +157,17 @@ def test_that_when_an_api_call_returns_401_or_403_it_raises_an_exception_and_cle
                     assert not mock_session
 
 
-def test_login_and_return_after_redirects_to_the_mavis_start_path_with_the_given_path_as_redirect_uri(
+def test_login_and_return_after_redirects_to_the_mavis_start_path_correctly(
     app,
 ):
     with app.app_context():
         app.config["MAVIS_ROOT_URL"] = "http://i.am.mavis:4000/"
 
-        # with patch("flask.redirect", return_value="mock redirect") as mocked_redirect:
         return_value = mavis_helper.login_and_return_after(
             app, "http://this.app/some/path"
         )
 
-        assert return_value.status_code == 302
+        assert return_value.status_code == HTTPStatus.FOUND
         assert (
             return_value.location
             == "http://i.am.mavis:4000/start?redirect_uri=http%3A%2F%2Fthis.app%2Fsome%2Fpath"

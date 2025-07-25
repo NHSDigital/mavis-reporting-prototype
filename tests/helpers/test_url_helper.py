@@ -1,7 +1,7 @@
 from mavis_reporting.helpers import url_helper
 
 
-def test_url_without_param_with_a_single_param_removes_the_param(app):
+def test_url_without_param_with_a_single_param_removes_the_param():
     assert (
         url_helper.url_without_param(
             "https://some.domain/path/file.name?q=search+string", "q"
@@ -10,7 +10,7 @@ def test_url_without_param_with_a_single_param_removes_the_param(app):
     )
 
 
-def test_url_without_param_with_multiple_params_removes_the_correct_param(app):
+def test_url_without_param_with_multiple_params_removes_the_correct_param():
     assert (
         url_helper.url_without_param(
             "https://some.domain/path/file.name?q=search%20string&other_param=othervalue",
@@ -20,9 +20,7 @@ def test_url_without_param_with_multiple_params_removes_the_correct_param(app):
     )
 
 
-def test_url_without_param_with_multiple_other_params_preserves_the_order_of_params_which_are_not_removed(
-    app,
-):
+def test_url_without_param_preserves_the_order_of_params_which_are_not_removed():
     assert (
         url_helper.url_without_param(
             "https://some.domain/path/file.name?q=search%20string&b=bbb&a=aaa",
@@ -32,9 +30,7 @@ def test_url_without_param_with_multiple_other_params_preserves_the_order_of_par
     )
 
 
-def test_url_without_param_with_a_single_param_that_is_not_present_makes_no_changes(
-    app,
-):
+def test_url_without_param_with_a_single_param_that_is_not_present_makes_no_changes():
     assert (
         url_helper.url_without_param(
             "https://some.domain/path/file.name?q=search+string&b=bbb&a=aaa&", "c"

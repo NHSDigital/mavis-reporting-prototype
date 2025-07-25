@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from http import HTTPStatus
 from flask import session
 from os import urandom
 from unittest import mock
@@ -27,7 +28,7 @@ def default_url():
 
 def it_redirects_to_mavis_start(response):
     # Check that the response had a redirect code.
-    assert response.status_code == 302
+    assert response.status_code == HTTPStatus.FOUND
     redirect_to = response.headers["Location"]
     assert redirect_to.startswith("http://mavis-root.localhost/")
     assert "/start" in redirect_to
@@ -50,7 +51,7 @@ def test_when_session_has_a_user_id_and_is_not_expired_it_does_not_redirect(
             )
 
         response = client.get(default_url())
-        assert response.status_code == 200
+        assert response.status_code == HTTPStatus.OK
 
 
 def test_when_session_has_a_user_id_but_is_expired_it_redirects_to_mavis_start(client):
@@ -86,6 +87,6 @@ def test_when_fake_login_is_enabled_it_logs_in_as_nurse_joy_without_a_redirect(
         with client:
             # with client.session_transaction() as session:
             response = client.get(default_url(), follow_redirects=False)
-            assert response.status_code == 200
+            assert response.status_code == HTTPStatus.OK
             assert session["user_id"] == 1
             assert session["user"]["email"] == "nurse.joy@example.com"

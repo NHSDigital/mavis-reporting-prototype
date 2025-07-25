@@ -1,3 +1,4 @@
+from http import HTTPStatus
 import requests
 import urllib.parse
 import werkzeug
@@ -45,7 +46,7 @@ def api_call(current_app, session, path, params={}):
         "Content-type": "application/json; charset=utf-8",
     }
     response = get_request(url, headers=headers)
-    if response.status_code == 401 or response.status_code == 403:
+    if response.status_code in [HTTPStatus.UNAUTHORIZED, HTTPStatus.FORBIDDEN]:
         session.clear()
         raise (werkzeug.exceptions.Unauthorized)
 

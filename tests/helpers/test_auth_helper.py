@@ -74,7 +74,7 @@ def test_that_log_user_in_copies_user_from_the_given_data(app):
         assert mock_session["user"] == fake_data["user"]
 
 
-def test_that_log_user_in_sets_a_minimal_jwt_with_just_cis2_info_user_id_and_the_reporting_app_session_token(
+def test_that_log_user_in_sets_minimal_jwt(
     app,
 ):
     mock_session = {}

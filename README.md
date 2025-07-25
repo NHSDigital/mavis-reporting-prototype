@@ -41,6 +41,22 @@ A Flask-based web application prototype for the commissioner reporting component
 
    The application will be available at <http://localhost:5000>.
 
+## Linting
+
+We use Ruff to lint the code. To run the linter, run the following command:
+
+```bash
+make lint
+```
+
+To run the linter with autofix, run the following command:
+
+```bash
+make lint-fix
+```
+
+To configure VSCode or variants thereof to use Ruff in your IDE, install the Ruff extension and it should be used automatically.
+
 ## Building & Running a Docker container
 
 The application can be built and run via Docker, to support deployment.

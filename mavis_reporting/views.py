@@ -17,7 +17,7 @@ from werkzeug.exceptions import Unauthorized
 import logging
 
 from mavis_reporting.api.client import MavisAPI
-from mavis_reporting.helpers.breacrumb_helper import generate_breadcrumb_items
+from mavis_reporting.helpers.breadcrumb_helper import generate_breadcrumb_items
 from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_items
 
 from mavis_reporting.helpers import mavis_helper

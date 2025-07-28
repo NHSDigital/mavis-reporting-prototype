@@ -17,7 +17,7 @@ from werkzeug.exceptions import Unauthorized
 import logging
 
 from mavis_reporting.api.client import MavisAPI
-from mavis_reporting.helpers.breacrumb_helper import generate_breadcrumb_items
+from mavis_reporting.helpers.breadcrumb_helper import generate_breadcrumb_items
 from mavis_reporting.helpers.secondary_nav_helper import generate_secondary_nav_items
 
 from mavis_reporting.helpers import mavis_helper
@@ -33,7 +33,6 @@ def get_region():
     """Get core data from the API and store it in the global g object."""
     api = MavisAPI()
     g.region = api.region()
-    logger.warning(api.programmes())
     g.programmes = [
         {
             "value": programme["code"],

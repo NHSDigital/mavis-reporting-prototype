@@ -7,7 +7,9 @@ from mavis_reporting.helpers.number_helper import thousands, percentage
 
 def configure_jinja2(app):
     app.jinja_options = {
-        "undefined": ChainableUndefined,  # This is needed to prevent jinja from throwing an error when chained parameters are undefined
+        # This is needed to prevent jinja from throwing an error
+        # when chained parameters are undefined
+        "undefined": ChainableUndefined,
         "loader": ChoiceLoader(
             [
                 FileSystemLoader(os.path.join(app.root_path, "templates")),

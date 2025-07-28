@@ -1,3 +1,6 @@
+# Ignoring line length for this file given it's faked data
+# ruff: noqa: E501
+
 from __future__ import annotations
 from typing import TYPE_CHECKING, List
 

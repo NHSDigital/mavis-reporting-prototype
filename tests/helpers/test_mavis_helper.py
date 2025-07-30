@@ -70,7 +70,7 @@ def test_that_verify_auth_code_is_called_correctly(
         app.config["MAVIS_ROOT_URL"] = "http://i.am.mavis:4000/"
         app.config["CLIENT_ID"] = "my secret key"
 
-        expected_url = "http://i.am.mavis:4000/tokens/authorize"
+        expected_url = "http://i.am.mavis:4000/api/reporting/authorize"
         expected_body = {
             "client_id": "my secret key",
             "code": "mock_code",

@@ -177,7 +177,7 @@ def healthcheck():
 def api_call():
     response = None
     try:
-        response = mavis_helper.api_call(current_app, session, "/reporting-api/totals")
+        response = mavis_helper.api_call(current_app, session, "/api/reporting/totals")
     except Unauthorized:
         return mavis_helper.login_and_return_after(current_app, request.url)
 

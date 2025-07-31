@@ -20,7 +20,7 @@ def mavis_url(current_app, path, params={}):
 
 
 def verify_auth_code(code, current_app):
-    url = mavis_url(current_app, "/tokens/authorize")
+    url = mavis_url(current_app, "/api/reporting/authorize")
     body = {
         "client_id": current_app.config["CLIENT_ID"],
         "code": code,

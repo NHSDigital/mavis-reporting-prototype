@@ -19,7 +19,7 @@ boto3 = "==1.39.14"
 pyyaml = "^6.0.2"
 requests = "^2.32.4"
 pyjwt = "^2.10.1"
-coverage = "^7.9.2"
+coverage = "^7.10.1"
 coverage-badge = "^1.1.2"
 
 [tool.ruff.lint]

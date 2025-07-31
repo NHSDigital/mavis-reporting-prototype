@@ -36,7 +36,6 @@ def login_required(f):
                     current_app,
                     "/start?redirect_uri=" + urllib.parse.quote(request.url),
                 )
-                current_app.logger.info("redirecting_to " + target_url)
                 return redirect(target_url)
 
         return f(*args, **kwargs)

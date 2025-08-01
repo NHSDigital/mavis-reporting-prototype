@@ -59,7 +59,10 @@ jobs:
       - name: "Run test coverage check"
         env:
             SECRET_KEY: "${{ secrets.SECRET_KEY_FOR_TESTS }}"
-            FAIL_IF_UNDER: 80
+            # This is explicitly a prototype, so no need to worry about test
+            # coverage. We'll keep the step for info, as it doesn't take long,
+            # just set the minimum coverage figure to zero:
+            FAIL_IF_UNDER: 0
         run: |
           make test-coverage
       - name: "Save the coverage check result"

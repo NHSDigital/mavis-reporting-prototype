@@ -37,6 +37,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     TESTING = False
     LOG_LEVEL = "DEBUG"
+    ASSETS_DEBUG = True
     # Uncomment this line to allow developing locally without having
     # the main Mavis running:
     # FAKE_LOGIN_ENABLED = True
@@ -48,6 +49,7 @@ class ProductionConfig(Config):
     DEBUG = False
     TESTING = False
     LOG_LEVEL = "INFO"
+    ASSETS_DEBUG = False
 
 
 class TestingConfig(Config):

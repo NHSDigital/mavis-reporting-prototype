@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cd "$1" || exit 1
+
+echo "----> Make install...."
+make install 
+
+echo "---> Compiling SCSS"
+npm run build:scss 
+
+echo "---> Compiling JS"
+ npm run build:js

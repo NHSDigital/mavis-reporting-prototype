@@ -38,11 +38,6 @@ dev: install
 	@echo "Press Ctrl+C to stop all processes"
 	@poetry run honcho start -f Procfile.dev
 
-.PHONY: prod
-prod: install 
-	@echo "== Starting production server =="
-	@FLASK_ENV=production poetry run gunicorn --bind "0.0.0.0:$(PORT)" "mavis_reporting:create_app()"
-	
 .PHONY: test-coverage
 test-coverage:
 	@true

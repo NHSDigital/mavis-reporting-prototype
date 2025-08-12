@@ -62,7 +62,7 @@ jobs:
       git-sha: ${{ steps.get-git-sha.outputs.git-sha }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ inputs.git_ref_to_deploy || github.sha }}
       - name: Get git sha
@@ -84,7 +84,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -122,7 +122,7 @@ jobs:
           role-to-assume: ${{ env.aws-role }}
           aws-region: eu-west-2
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Download web task definition artifact
         uses: actions/download-artifact@v5
         with:

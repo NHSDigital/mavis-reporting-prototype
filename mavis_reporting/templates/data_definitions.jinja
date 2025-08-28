@@ -1,0 +1,79 @@
+{% from "components/heading.jinja" import heading %}
+
+{% extends 'layouts/base.jinja' %}
+
+{% block pageTitle %}Terms and definitions | {{ site_title }}{% endblock %}
+
+{% block page_content %}
+
+{{ heading({
+  "text": "Terms and definitions",
+  "level": 1,
+  "size": "xl",
+}) }}
+
+<p class="nhsuk-body-m">
+  This page defines the terms used in the dashboards and data downloads available on this site.
+</p>
+
+<h2 class="nhsuk-heading-l">School progress</h2>
+
+<dl class="nhsuk-summary-list app-definition-list ">
+  <dt class="app-definition-list__term">Schools with scheduled sessions</dt>
+  <dd class="app-definition-list__definition">
+    Number of schools with at least one session scheduled in this programme year
+  </dd>
+  <dt class="app-definition-list__term">Schools with consent sent</dt>
+  <dd class="app-definition-list__definition">
+    Number of schools where initial consent requests have been sent to parents
+  </dd>
+  <dt class="app-definition-list__term">Schools with completed sessions</dt>
+  <dd class="app-definition-list__definition">
+    Number of schools with at least one completed session
+  </dd>
+</dl>
+
+<h2 class="nhsuk-heading-l">Vaccinations</h2>
+
+<dl class="nhsuk-summary-list app-definition-list">
+  <dt class="app-definition-list__term">Eligible cohort</dt>
+  <dd class="app-definition-list__definition">
+    Number of children eligible for the vaccine in this programme year
+  </dd>
+  <dt class="app-definition-list__term">Vaccinated by SAIS</dt>
+  <dd class="app-definition-list__definition">
+    Number of children who have received the vaccine from a SAIS team in this programme year
+  </dd>
+  <dt class="app-definition-list__term">Vaccinated elsewhere (self-reported)</dt>
+  <dd class="app-definition-list__definition">
+    Number of children who have received the vaccine elsewhere in this programme year, according to the parents or child
+  </dd>
+  <dt class="app-definition-list__term">Uptake</dt>
+  <dd class="app-definition-list__definition">
+    Percentage of children in the eligible cohort who have received the vaccine in this programme year
+  </dd>
+</dl>
+
+
+<h2 class="nhsuk-heading-l">Consent</h2>
+
+<dl class="nhsuk-summary-list app-definition-list">
+  <dt class="app-definition-list__term">Consent requested</dt>
+  <dd class="app-definition-list__definition">
+    Percentage of children whose parents have been asked for consent to vaccinate their child
+  </dd>
+  <dt class="app-definition-list__term">Consent given</dt>
+  <dd class="app-definition-list__definition">
+    Percentage of children for whom consent has been given
+  </dd>
+  <dt class="app-definition-list__term">Consent refused</dt>
+  <dd class="app-definition-list__definition">
+    Percentage of children for whom consent has been refused
+  </dd>
+  <dt class="app-definition-list__term">No response</dt>
+  <dd class="app-definition-list__definition">
+    Percentage of children for whom no response has been received to the consent request
+  </dd>
+</dl>
+
+{% endblock %}

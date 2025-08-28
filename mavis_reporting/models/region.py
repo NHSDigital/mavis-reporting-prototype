@@ -14,7 +14,8 @@ class Region(Organisation):
         super().__init__(region)
         self.providers: list[Provider] = []
         self.schools: list[School] = []
-        self.fake_measures("region")
+        self.type = "region"
+        self.fake_measures(self.type)
 
     def url(self) -> str:
         return url_for("main.region", code=self.code)

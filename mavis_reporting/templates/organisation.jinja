@@ -5,7 +5,7 @@
 
 {% extends 'layouts/dashboard.jinja' %}
 
-{% block pageTitle %}{{ organisation.name }} | Manage vaccinations in schools{% endblock %}
+{% block pageTitle %}{{ organisation.name }} | {{ site_title }}{% endblock %}
 
 {% block dashboard_content %}
 
@@ -19,9 +19,51 @@
   </div>
 
   <div class="app-grid-column-content">
+    {% if organisation.type != "school" %}
+    <h2 class="nhsuk-heading-m">
+      School progress
+    </h2> 
+
+    <div class="nhsuk-card-group nhsuk-grid-row app-card-group">
+      <div class="nhsuk-grid-column-one-third nhsuk-card-group__item app-card-group__item">
+        {{ card({
+          "classes": "app-card",
+          "heading": "Schools with scheduled sessions",
+          "headingClasses": "nhsuk-heading-xs",
+          "headingLevel": 3,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_scheduled') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
+        }) }}
+      </div>
+
+      <div class="nhsuk-grid-column-one-third nhsuk-card-group__item app-card-group__item">
+        {{ card({
+          "classes": "app-card",
+          "heading": "Schools with consent sent",
+          "headingClasses": "nhsuk-heading-xs",
+          "headingLevel": 3,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_notified') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
+        }) }}
+      </div>
+
+      <div class="nhsuk-grid-column-one-third nhsuk-card-group__item app-card-group__item">
+        {{ card({
+          "classes": "app-card",
+          "heading": "Schools with completed sessions",
+          "headingClasses": "nhsuk-heading-xs",
+          "headingLevel": 3,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('schools_completed') | thousands  ~ " <span class='nhsuk-card__caption'>out of " ~ organisation.measure_value('schools') | thousands ~ "</span></p>",
+        }) }}
+      </div>
+    </div>
+    {% endif %}
+
     <h2 class="nhsuk-heading-m">
       Vaccinations
     </h2>
+
+    <p class="nhsuk-body-m">
+      All statistics relate to vaccinations given in this programme year.
+    </p>
 
     <div class="nhsuk-card-group nhsuk-grid-row app-card-group">
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
@@ -30,17 +72,27 @@
           "heading": "Eligible cohort",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('eligible_cohort') | thousands
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('eligible_cohort') | thousands ~ "<span class='nhsuk-card__caption'>children</span></p>",
         }) }}
       </div>
 
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
           "classes": "app-card",
-          "heading": "Vaccinated",
+          "heading": "Vaccinated by SAIS",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('vaccinated') | thousands
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('vaccinated_percentage') | percentage ~ "<span class='nhsuk-card__caption'>" ~ organisation.measure_value('vaccinated') | thousands ~ " children</span></p>",
+        }) }}
+      </div>
+
+      <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
+        {{ card({
+          "classes": "app-card",
+          "heading": "Vaccinated elsewhere (self-reported)",
+          "headingClasses": "nhsuk-heading-xs",
+          "headingLevel": 3,
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('vaccinated_elsewhere_percentage') | percentage ~ "<span class='nhsuk-card__caption'>" ~ organisation.measure_value('vaccinated_elsewhere') | thousands ~ " children</span></p>",
         }) }}
       </div>
 
@@ -50,17 +102,7 @@
           "heading": "Uptake",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('uptake') | percentage
-        }) }}
-      </div>
-
-      <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
-        {{ card({
-          "classes": "app-card",
-          "heading": "Outstanding",
-          "headingClasses": "nhsuk-heading-xs",
-          "headingLevel": 3,
-          "description": organisation.measure_value('outstanding') | thousands
+          "HTML": "<p class='nhsuk-card__description'>" ~ organisation.measure_value('uptake') | percentage ~ "<span class='nhsuk-card__caption'>" ~ "of the eligible cohort</span></p>",
         }) }}
       </div>
     </div>
@@ -73,30 +115,39 @@
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
           "classes": "app-card",
-          "heading": "Offered",
+          "heading": "Consent requested",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_offered') | thousands
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('consent_offered_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_offered') | thousands ~ " children"
+            ~ "</span></p>",
         }) }}
       </div>
 
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
           "classes": "app-card",
-          "heading": "Consented",
+          "heading": "Consent given",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_given') | thousands
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('consent_given_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_given') | thousands ~ " children"
+            ~ "</span></p>",
         }) }}
       </div>
 
       <div class="nhsuk-grid-column-one-quarter nhsuk-card-group__item app-card-group__item">
         {{ card({
           "classes": "app-card",
-          "heading": "Refused",
+          "heading": "Consent refused",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('consent_refused') | thousands
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('consent_refused_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('consent_refused') | thousands ~ " children"
+            ~ "</span></p>",
         }) }}
       </div>
 
@@ -106,7 +157,10 @@
           "heading": "No response",
           "headingClasses": "nhsuk-heading-xs",
           "headingLevel": 3,
-          "description": organisation.measure_value('no_response') | thousands
+          "HTML": "<p class='nhsuk-card__description'>"
+             ~ organisation.measure_value('no_response_percentage') | percentage
+             ~ " <span class='nhsuk-card__caption'>" ~ organisation.measure_value('no_response') | thousands ~ " children"
+            ~ "</span></p>",
         }) }}
       </div>
     </div>

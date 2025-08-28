@@ -18,7 +18,7 @@
       "size": "xl",
     }) }}
 
-    <form action="/login" method="post">
+    <form action="{{ url_for('main.login') }}" method="post">
       <button type="submit" name="role" value="region" class="nhsuk-card nhsuk-card--button nhsuk-card--clickable">
         <div class="nhsuk-card__content">
           <h2 class="nhsuk-heading-m nhsuk-card__heading">{{ region.name }}</h2>

@@ -3,6 +3,7 @@ def default_url():
 
 
 def test_that_index_redirects_to_region(client):
-    response = client.get(default_url(), follow_redirects=False)
+    client.post("/reporting/login", data={"role": "region"}, follow_redirects=False)
+    response = client.get("/reporting/", follow_redirects=False)
     redirect_to = response.headers["Location"]
     assert redirect_to.endswith("/reporting/region/Y55")

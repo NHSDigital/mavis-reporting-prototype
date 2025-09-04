@@ -86,7 +86,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: ${{ env.aws-role }}
           aws-region: eu-west-2
@@ -117,7 +117,7 @@ jobs:
       id-token: write
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: ${{ env.aws-role }}
           aws-region: eu-west-2

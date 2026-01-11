@@ -19,6 +19,10 @@ A Flask-based web application prototype for the commissioner reporting component
    mise install
    ```
 
+> [!TIP]
+> If `mise` reports an error, you may need to run `mise cache clear`, see
+> [mise issue #2962](https://github.com/jdx/mise/issues/2962mise issue #2962) for more details.
+
 2. **Install project dependencies**
 
    This will install the project dependencies using Poetry and NPM.
